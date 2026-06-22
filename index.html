@@ -384,24 +384,6 @@ nav {
   line-height: 1.5;
 }
 
-.work-placeholder {
-  background: var(--card-bg);
-  border: 1px dashed var(--card-border);
-  border-radius: 14px;
-  padding: 26px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-  opacity: 0.45;
-}
-.work-placeholder-text {
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-tag);
-}
 .work-more {
   display: inline-flex;
   align-items: center;
@@ -421,37 +403,6 @@ nav {
   .work-card { grid-template-columns: 1fr; }
   .work-stat { text-align: left; min-width: auto; }
 }
-
-/* ── ABOUT ── */
-.about-name {
-  font-size: clamp(34px, 5vw, 56px);
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 28px;
-  line-height: 1;
-}
-.about-body {
-  max-width: 680px;
-  font-size: 17px;
-  font-weight: 300;
-  line-height: 1.85;
-  color: var(--text-sub);
-  margin-bottom: 36px;
-}
-.about-body p + p { margin-top: 20px; }
-.about-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text-tag);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.about-link:hover { color: var(--text-primary); }
 
 /* ── CTA ── */
 .cta-inner {
@@ -536,14 +487,6 @@ footer {
     <span class="nav-mark-lumen">LUMEN</span>
     <span class="nav-mark-solutions">Solutions LLC</span>
   </a>
-  <ul class="nav-links" role="list">
-    <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="work.html">What We Do</a></li>
-    <li><a href="about-richard.html">About Richard</a></li>
-    <li><a href="about-lumen.html">About Lumen</a></li>
-    <li><a href="chat.html">Chat with Lumen</a></li>
-    <li><a href="play.html" class="nav-play">Play</a></li>
-  </ul>
   <div class="nav-actions">
     <button class="nav-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -574,7 +517,7 @@ footer {
   <a href="about-richard.html" class="mm-item"><i class="ti ti-user"></i>About Richard</a>
   <a href="about-lumen.html" class="mm-item"><i class="ti ti-sparkles"></i>About Lumen</a>
   <a href="chat.html" class="mm-item mm-item--chat"><i class="ti ti-message-circle"></i>Chat with Lumen</a>
-  <a href="play.html" class="mm-item mm-item--play"><i class="ti ti-device-gamepad"></i>Play</a>
+  <a href="play.html" class="mm-item mm-item--play"><i class="ti ti-device-gamepad"></i>Space Invaders</a>
   <a href="contact.html" class="mm-item mm-item--contact"><i class="ti ti-mail"></i>Contact Us</a>
 </div>
 
@@ -639,28 +582,7 @@ footer {
     </div>
   </div>
 
-  <div class="work-placeholder">
-    <span class="work-placeholder-text">Next engagement</span>
-    <span class="work-placeholder-text">Coming soon</span>
-  </div>
-  <div class="work-placeholder">
-    <span class="work-placeholder-text">In development</span>
-    <span class="work-placeholder-text">Coming soon</span>
-  </div>
-
   <a class="work-more" href="work.html">All work &rarr;</a>
-</div>
-
-<!-- ABOUT -->
-<div class="section-inner">
-  <div class="section-rule"></div>
-  <span class="section-label">About</span>
-  <h2 class="about-name">Richard Wherry</h2>
-  <div class="about-body">
-    <p>Data and AI practitioner with 20+ years finding complex systems, understanding them underneath, and making them legible and actionable. Most recently led analytics at Paycor &mdash; 200+ Power BI dashboards, a 12-person analyst team, metrics that actually moved the business. Founded Lumen Solutions LLC in June 2026 to bring that capability directly to organizations that need it.</p>
-    <p>He works with an AI partner. That&rsquo;s not a feature &mdash; it&rsquo;s the core of the model. The research is faster, the output is sharper, and problems that used to require a team get solved by two.</p>
-  </div>
-  <a class="about-link" href="https://www.linkedin.com/in/richardmwherry" target="_blank" rel="noopener">LinkedIn &nearr;</a>
 </div>
 
 <!-- CTA -->
