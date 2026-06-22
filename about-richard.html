@@ -98,21 +98,23 @@ nav {
 [data-theme="light"] .btn-chat:hover { background: rgba(83,74,183,0.18); }
 .btn-contact { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-primary); border: 1px solid var(--btn-border); border-radius: 100px; padding: 8px 18px; text-decoration: none; transition: background 0.25s, color 0.25s, border-color 0.25s; white-space: nowrap; }
 .btn-contact:hover { background: var(--btn-fill); border-color: var(--btn-fill); color: #fff; }
-.nav-hamburger { display: none; background: none; border: 1px solid var(--toggle-border); border-radius: 6px; padding: 6px 10px; cursor: pointer; color: var(--text-tag); font-size: 16px; }
+.nav-hamburger { display: none; background: var(--card-bg); border: 1px solid var(--rule); border-radius: 8px; padding: 7px 11px; cursor: pointer; color: var(--text-primary); font-size: 16px; line-height: 1; transition: background 0.2s, color 0.2s, border-color 0.2s; }
 /* ── MOBILE MENU ── */
-.mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--rule); padding: 16px 20px 20px; z-index: 999; flex-direction: column; gap: 6px; }
+.mobile-menu { display: none; position: fixed; top: 68px; right: 16px; width: 240px; background: var(--nav-bg); backdrop-filter: blur(24px); border: 1px solid var(--rule); border-radius: 16px; padding: 8px; z-index: 999; flex-direction: column; gap: 2px; box-shadow: 0 8px 32px rgba(0,0,0,0.35); }
 .mobile-menu.open { display: flex; }
-.mm-item { display: flex; align-items: center; padding: 13px 18px; border-radius: 10px; text-decoration: none; color: var(--text-primary); font-size: 13px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; border: 0.5px solid rgba(45,80,200,0.2); transition: border-color 0.2s, background 0.2s; }
-.mm-item:hover { border-color: rgba(45,80,200,0.5); background: rgba(45,80,200,0.06); }
-.mm-item--chat { background: rgba(83,74,183,0.16); border-color: rgba(127,119,221,0.45); color: rgba(210,205,255,0.95); }
-.mm-item--chat:hover { background: rgba(83,74,183,0.28); border-color: rgba(127,119,221,0.7); }
-.mm-item--contact { background: rgba(45,80,200,0.12); border-color: rgba(45,80,200,0.4); }
-.mm-item--contact:hover { background: rgba(45,80,200,0.22); }
+.mm-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; text-decoration: none; color: var(--text-primary); font-size: 12px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.15s; }
+.mm-item i { font-size: 16px; color: var(--text-tag); flex-shrink: 0; }
+.mm-item:hover { background: rgba(45,80,200,0.08); }
+.mm-item--chat { color: rgba(210,205,255,0.9); }
+.mm-item--chat i { color: rgba(160,150,255,0.85); }
+.mm-item--chat:hover { background: rgba(83,74,183,0.18); }
 .mm-item--play { color: #2D50C8; }
-[data-theme="light"] .mm-item { background: rgba(240,244,255,0.9); border-color: rgba(18,38,110,0.15); }
-[data-theme="light"] .mm-item--chat { background: rgba(83,74,183,0.08); border-color: rgba(83,74,183,0.25); color: #534ab7; }
-[data-theme="light"] .mm-item--contact { background: rgba(18,38,110,0.08); border-color: rgba(18,38,110,0.3); }
-@media (max-width: 1100px) { .nav-links { display: none; } .btn-chat, .btn-contact { display: none; } .nav-hamburger { display: block; } nav { padding: 0 24px; } }
+.mm-item--play i { color: #2D50C8; }
+[data-theme="light"] .mm-item--chat { color: #534ab7; }
+[data-theme="light"] .mm-item--chat i { color: #534ab7; }
+.nav-hamburger:hover { background: var(--btn-fill) !important; color: #fff !important; border-color: var(--btn-fill) !important; }
+@media (max-width: 1100px) { .nav-links { display: none; } .nav-hamburger { display: block; } nav { padding: 0 20px; } }
+@media (max-width: 560px) { .btn-chat, .btn-contact { padding: 6px 10px; font-size: 10px; letter-spacing: 0.07em; } .nav-toggle-label { display: none; } .nav-actions { gap: 6px; } }
 
 /* ── LAYOUT ── */
 .section-inner { max-width: 1100px; margin: 0 auto; padding: 100px 48px; }
@@ -287,13 +289,13 @@ footer { border-top: 1px solid var(--rule); padding: 32px 48px; max-width: 1100p
 </nav>
 
 <div class="mobile-menu" id="mobile-menu" role="navigation">
-  <a href="index.html" class="mm-item">Home</a>
-  <a href="work.html" class="mm-item">What We Do</a>
-  <a href="about-richard.html" class="mm-item">About Richard</a>
-  <a href="about-lumen.html" class="mm-item">About Lumen</a>
-  <a href="chat.html" class="mm-item mm-item--chat">Chat with Lumen</a>
-  <a href="play.html" class="mm-item mm-item--play">Play</a>
-  <a href="contact.html" class="mm-item mm-item--contact">Contact Us</a>
+  <a href="index.html" class="mm-item"><i class="ti ti-home"></i>Home</a>
+  <a href="work.html" class="mm-item"><i class="ti ti-briefcase"></i>What We Do</a>
+  <a href="about-richard.html" class="mm-item"><i class="ti ti-user"></i>About Richard</a>
+  <a href="about-lumen.html" class="mm-item"><i class="ti ti-sparkles"></i>About Lumen</a>
+  <a href="chat.html" class="mm-item mm-item--chat"><i class="ti ti-message-circle"></i>Chat with Lumen</a>
+  <a href="play.html" class="mm-item mm-item--play"><i class="ti ti-device-gamepad"></i>Play</a>
+  <a href="contact.html" class="mm-item mm-item--contact"><i class="ti ti-mail"></i>Contact Us</a>
 </div>
 
 <footer>
