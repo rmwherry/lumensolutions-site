@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume &mdash; Richard Wherry</title>
+<meta name="description" content="Richard Wherry — Data & Analytics Leader, AI Consulting. Full resume.">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:             #04070e;
+  --nav-bg:         rgba(4,7,14,0.85);
+  --text-primary:   #e8eeff;
+  --text-sub:       rgba(175,205,255,0.82);
+  --text-tag:       rgba(120,145,195,0.7);
+  --rule:           rgba(58,91,206,0.18);
+  --card-bg:        rgba(10,15,30,0.6);
+  --card-border:    rgba(45,80,200,0.2);
+  --card-glow:      rgba(45,80,200,0.55);
+  --btn-border:     rgba(45,80,200,0.5);
+  --btn-fill:       #2D50C8;
+  --toggle-bg:      rgba(255,255,255,0.06);
+  --toggle-border:  rgba(255,255,255,0.12);
+  --neon-hero:
+    0 0 6px  #fff,
+    0 0 18px rgba(175,205,255,0.9),
+    0 0 40px rgba(80,125,245,0.75),
+    0 0 80px rgba(45,80,200,0.55);
+  --neon-sub:
+    0 0 4px  rgba(200,220,255,0.6),
+    0 0 18px rgba(80,125,245,0.55),
+    0 0 40px rgba(45,80,200,0.35);
+  --neon-tag: 0 0 8px rgba(45,80,200,0.25);
+  --neon-card:
+    0 0 20px rgba(45,80,200,0.25),
+    0 0 40px rgba(45,80,200,0.12);
+}
+
+[data-theme="light"] {
+  --bg:             #fcfcfc;
+  --nav-bg:         rgba(252,252,252,0.92);
+  --text-primary:   #12266e;
+  --text-sub:       #3a4a7a;
+  --text-tag:       #6e78a0;
+  --rule:           #dde0ea;
+  --card-bg:        #f4f6fd;
+  --card-border:    #dde0ea;
+  --card-glow:      #12266e;
+  --btn-border:     #12266e;
+  --btn-fill:       #12266e;
+  --toggle-bg:      rgba(0,0,0,0.04);
+  --toggle-border:  rgba(0,0,0,0.10);
+  --neon-hero:      none;
+  --neon-sub:       none;
+  --neon-tag:       none;
+  --neon-card:      none;
+}
+
+html, body {
+  background: var(--bg);
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-primary);
+  transition: background 0.4s, color 0.3s;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--rule);
+  z-index: 1000;
+  transition: background 0.4s, border-color 0.4s;
+}
+.nav-mark { text-decoration: none; display: flex; flex-direction: column; align-items: flex-start; line-height: 1; gap: 2px; }
+.nav-mark-lumen { font-size: 17px; font-weight: 700; letter-spacing: 0.16em; color: var(--text-primary); text-shadow: var(--neon-hero); transition: color 0.3s, text-shadow 0.3s; }
+[data-theme="light"] .nav-mark-lumen { text-shadow: none; }
+.nav-mark-solutions { font-size: 8.5px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-sub); }
+.nav-links { display: flex; align-items: center; gap: 20px; list-style: none; }
+.nav-links a { font-size: 11.5px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-tag); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
+.nav-play { color: #2D50C8 !important; }
+.nav-actions { display: flex; align-items: center; gap: 14px; }
+.nav-toggle { display: flex; align-items: center; gap: 7px; background: var(--toggle-bg); border: 1px solid var(--toggle-border); border-radius: 100px; padding: 5px 12px; cursor: pointer; color: var(--text-tag); transition: background 0.3s; }
+.nav-toggle:hover { filter: brightness(1.15); }
+.nav-toggle svg { width: 13px; height: 13px; stroke: currentColor; }
+.nav-toggle-label { font-size: 10.5px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-tag); user-select: none; }
+.btn-talk { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-primary); border: 1px solid var(--btn-border); border-radius: 100px; padding: 8px 20px; text-decoration: none; transition: background 0.25s, color 0.25s, border-color 0.25s; white-space: nowrap; }
+.btn-talk:hover { background: var(--btn-fill); border-color: var(--btn-fill); color: #fff; }
+.nav-hamburger { display: none; background: none; border: 1px solid var(--toggle-border); border-radius: 6px; padding: 6px 10px; cursor: pointer; color: var(--text-tag); font-size: 16px; }
+.mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--rule); padding: 28px 32px; z-index: 999; flex-direction: column; gap: 22px; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-size: 13px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-tag); text-decoration: none; }
+.mobile-menu a:hover { color: var(--text-primary); }
+@media (max-width: 1100px) { .nav-links, .nav-toggle { display: none; } .nav-hamburger { display: block; } nav { padding: 0 24px; } }
+
+/* ── RESUME CONTAINER ── */
+.resume-outer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 120px 48px 80px;
+}
+
+/* ── RESUME HEADER ── */
+.res-header {
+  margin-bottom: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--rule);
+}
+.res-name {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  text-shadow: var(--neon-hero);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+[data-theme="light"] .res-name { text-shadow: none; }
+.res-headline {
+  font-size: 15px;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: var(--text-sub);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.res-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+}
+.res-contact a, .res-contact span {
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--text-tag);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.res-contact a:hover { color: var(--text-primary); }
+
+/* ── DOWNLOAD BUTTON ── */
+.download-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 56px;
+  padding: 20px 28px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+}
+.download-label {
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--text-tag);
+  flex: 1;
+}
+.btn-download {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--btn-fill);
+  border: 1px solid var(--btn-fill);
+  border-radius: 100px;
+  padding: 9px 22px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.btn-download:hover { opacity: 0.85; }
+
+/* ── RESUME SECTIONS ── */
+.res-section {
+  margin-bottom: 52px;
+}
+.res-section-label {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--text-tag);
+  text-shadow: var(--neon-tag);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+[data-theme="light"] .res-section-label { text-shadow: none; }
+
+.res-summary {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text-sub);
+}
+
+/* ── COMPETENCY GRID ── */
+.comp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.comp-group h4 {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+.comp-group ul {
+  list-style: none;
+}
+.comp-group li {
+  font-size: 13.5px;
+  font-weight: 300;
+  color: var(--text-sub);
+  line-height: 1.8;
+}
+@media (max-width: 600px) {
+  .comp-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── EXPERIENCE ENTRIES ── */
+.exp-entry {
+  margin-bottom: 40px;
+}
+.exp-entry + .exp-entry {
+  padding-top: 40px;
+  border-top: 1px solid var(--rule);
+}
+.exp-employer {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-tag);
+  margin-bottom: 16px;
+}
+.exp-role-block {
+  margin-bottom: 20px;
+}
+.exp-role-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+.exp-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+.exp-dates {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--text-tag);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.exp-bullets {
+  list-style: none;
+  padding: 0;
+}
+.exp-bullets li {
+  font-size: 14.5px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-sub);
+  padding-left: 18px;
+  position: relative;
+  margin-bottom: 8px;
+}
+.exp-bullets li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--text-tag);
+}
+
+/* ── TECH ROW ── */
+.tech-list {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--text-sub);
+}
+
+/* ── EDUCATION ── */
+.edu-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+}
+.edu-degree {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+.edu-school {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-tag);
+  text-align: right;
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 32px 48px;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: border-color 0.4s;
+}
+.footer-copy { font-size: 11.5px; font-weight: 300; letter-spacing: 0.1em; color: var(--text-tag); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 11.5px; font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-tag); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--text-primary); }
+
+@media (max-width: 600px) {
+  .resume-outer { padding: 100px 24px 60px; }
+  .exp-role-line { flex-direction: column; gap: 4px; }
+  .edu-line { flex-direction: column; gap: 4px; }
+  .edu-school { text-align: left; }
+  footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-mark" href="index.html" aria-label="Lumen Solutions LLC home">
+    <span class="nav-mark-lumen">LUMEN</span>
+    <span class="nav-mark-solutions">Solutions LLC</span>
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="work.html">What We Do</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="resume.html" class="active">Richard&rsquo;s Resume</a></li>
+    <li><a href="chat.html">Chat with Lumen</a></li>
+    <li><a href="play.html" class="nav-play">Play Space Invaders &mdash; Lumen Edition</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path id="icon-moon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        <g id="icon-sun" style="display:none">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </g>
+      </svg>
+      <span class="nav-toggle-label" id="toggle-label">Light</span>
+    </button>
+    <a class="btn-talk" href="chat.html">Working on something?</a>
+  </div>
+  <button class="nav-hamburger" onclick="toggleMobile()" aria-label="Open menu">&#9776;</button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu" role="navigation">
+  <a href="index.html">Home</a>
+  <a href="work.html">What We Do</a>
+  <a href="about.html">About Us</a>
+  <a href="resume.html">Richard&rsquo;s Resume</a>
+  <a href="chat.html">Chat with Lumen</a>
+  <a href="play.html" style="color:#2D50C8">Play Space Invaders &mdash; Lumen Edition</a>
+  <a href="chat.html" style="color:var(--text-primary);margin-top:8px">Working on something? &rarr;</a>
+</div>
+
+<!-- RESUME -->
+<div class="resume-outer">
+
+  <!-- HEADER -->
+  <div class="res-header">
+    <h1 class="res-name">Richard Wherry</h1>
+    <p class="res-headline">Data &amp; Analytics Leader &nbsp;&middot;&nbsp; AI-Enabled BI Modernization &nbsp;&middot;&nbsp; Contact Center &amp; CX Performance</p>
+    <div class="res-contact">
+      <a href="mailto:rmwherry@gmail.com">rmwherry@gmail.com</a>
+      <span>(513) 252-8272</span>
+      <span>Oxford, OH 45056</span>
+      <a href="https://www.linkedin.com/in/richardmwherry" target="_blank" rel="noopener">linkedin.com/in/richardmwherry</a>
+    </div>
+  </div>
+
+  <!-- DOWNLOAD -->
+  <div class="download-bar">
+    <span class="download-label">Prefer a file? Download the full resume as a PDF.</span>
+    <a class="btn-download" href="RWherry_Resume_v8.pdf" download="RWherry_Resume.pdf">Download PDF</a>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="res-section">
+    <p class="res-section-label">Professional Summary</p>
+    <p class="res-summary">I turn messy, ambiguous operational data into decisions that move business metrics. Over 21 years at Macy&rsquo;s and Paycor, I built analytics functions from scratch, scaled them across enterprise CX and HCM environments, and led teams through two technology pivots. My record includes a 15% reduction in client loss revenue, first-contact resolution improved from 75% to 90%+ sustained, and a BI modernization program that rewired reporting across four business units. Currently applying that same instinct to AI consulting and agentic workflow design through Lumen Solutions LLC.</p>
+  </div>
+
+  <!-- COMPETENCIES -->
+  <div class="res-section">
+    <p class="res-section-label">Core Competencies</p>
+    <div class="comp-grid">
+      <div class="comp-group">
+        <h4>Leadership &amp; Delivery</h4>
+        <ul>
+          <li>Product &amp; Project Strategy</li>
+          <li>Agile / Scrum &middot; Waterfall</li>
+          <li>Analyst Team Leadership (12)</li>
+          <li>Operations Leadership (50)</li>
+          <li>Offshore &amp; Vendor Management</li>
+          <li>Contact Center Performance</li>
+          <li>Change Leadership</li>
+        </ul>
+      </div>
+      <div class="comp-group">
+        <h4>Analytics &amp; Technology</h4>
+        <ul>
+          <li>KPI Reporting &amp; Dashboarding</li>
+          <li>Power BI Architecture</li>
+          <li>Tableau Server Administration</li>
+          <li>Snowflake &middot; SQL Server &middot; SQL/DAX</li>
+          <li>Gainsight &middot; Salesforce CRM</li>
+          <li>BI Modernization Programs</li>
+          <li>Self-Service Analytics</li>
+        </ul>
+      </div>
+      <div class="comp-group">
+        <h4>AI &amp; Emerging Tech</h4>
+        <ul>
+          <li>Prompt Engineering</li>
+          <li>AI-Assisted Data Governance</li>
+          <li>Agentic Workflow Design</li>
+          <li>LLM Integration (Claude, Copilot)</li>
+          <li>AI Adoption &amp; Change Mgmt</li>
+          <li>Reporting Automation</li>
+          <li>AI-Native Product Development</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="res-section">
+    <p class="res-section-label">Professional Experience</p>
+
+    <!-- LUMEN SOLUTIONS -->
+    <div class="exp-entry">
+      <p class="exp-employer">Lumen Solutions LLC &nbsp;&middot;&nbsp; Jun 2026 &ndash; Present</p>
+      <div class="exp-role-block">
+        <div class="exp-role-line">
+          <span class="exp-title">Founder &amp; Principal AI Consultant</span>
+          <span class="exp-dates">Jun 2026 &ndash; Present</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Deployed a custom Claude-powered AI assistant for a nonprofit client, enabling communications and donor relations leadership to accelerate major donor campaign development and employee handbook modernization &mdash; achieving daily active use within weeks of launch; end-to-end agentic workflow design from discovery through production deployment.</li>
+          <li>Engagement active; client in early deployment, applying the tool across donor listing and campaign communications workflows.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PAYCOR -->
+    <div class="exp-entry">
+      <p class="exp-employer">Paycor &nbsp;&middot;&nbsp; Apr 2022 &ndash; Jun 2026</p>
+
+      <div class="exp-role-block">
+        <div class="exp-role-line">
+          <span class="exp-title">Senior Manager, Client Experience Reporting &amp; Analytics</span>
+          <span class="exp-dates">Jun 2024 &ndash; Jun 2026</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Expanded scope from CX analytics to enterprise-wide: led reporting and analytics for all of Paycor, then served as analytics continuity lead through the Paychex acquisition (Apr 2025) &mdash; maintaining full dashboard and KPI cadences without interruption and onboarding Paychex stakeholders to Paycor reporting infrastructure.</li>
+          <li>Drove AI adoption across the analyst team: onboarded 10-person team onto Claude, Microsoft Copilot, ChatGPT/LibreChat, and Paychex internal AI tools, establishing AI-assisted workflows for documentation, data governance, and report automation.</li>
+          <li>Architected and maintained a five-workspace Power BI ecosystem (Service/CX, Success, Implementation, Leadership, Development) spanning 200+ active dashboard views connecting Gainsight, Salesforce, and Snowflake &mdash; including four executive dashboards and a custom implementation journey tracker with velocity-based forecasting capability.</li>
+          <li>Delivered on-demand custom analytical studies &mdash; A/B testing, retention analysis, case aging &mdash; through bespoke Snowflake connections, providing point-in-time intelligence unavailable through standard reporting pipelines.</li>
+        </ul>
+      </div>
+
+      <div class="exp-role-block">
+        <div class="exp-role-line">
+          <span class="exp-title">Manager, CX Reporting &amp; Analytics</span>
+          <span class="exp-dates">Apr 2022 &ndash; Jun 2024</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Served as centralized analytics and KPI reporting lead for four CX business units (Implementation, Customer Service, Client Success, Contact Center Support Operations); led a team of up to 10 domestic and offshore analysts and established the reporting infrastructure from the ground up.</li>
+          <li>Solutioned the company&rsquo;s first multi-channel first-contact resolution methodology &mdash; creating FCR visibility across voice, chat, and digital channels; within six months, sustained FCR improved from 75% to 90%+, meeting the executive target consistently through 2024.</li>
+          <li>Partnered with Engineering, Data Science, and Operations SMEs to design and measure a custom retention analytics initiative contributing directly to a 15% reduction in client loss revenue within the fiscal year, including ROI measurement and executive reporting supporting budget and performance decisions.</li>
+          <li>Introduced Agile intake and sprint governance as Product Owner for the analytics backlog &mdash; establishing readiness reviews, definitions of done, and effort estimates per sprint &mdash; freeing approximately 15% of team capacity for real-time triage and executive analysis.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MACY'S -->
+    <div class="exp-entry">
+      <p class="exp-employer">Macy&rsquo;s, Inc. &nbsp;&middot;&nbsp; Jun 2005 &ndash; Apr 2022</p>
+
+      <div class="exp-role-block">
+        <div class="exp-role-line">
+          <span class="exp-title">Senior Manager, Business Intelligence</span>
+          <span class="exp-dates">2018 &ndash; 2022</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Owned the BI product lifecycle for Macy&rsquo;s Retail customer service operations &mdash; website, big-ticket, credit, and fulfillment &mdash; delivering KPI dashboards, scorecards, and financial reports via Tableau Server and Power BI.</li>
+          <li>Built and led a 12-person analyst team (domestic + offshore in Philippines and India), managing a prioritized backlog of large-scale dashboard builds and financial reports, partnering with Engineering and Operations from scoping through delivery.</li>
+          <li>Maintained reporting continuity through the 2020 COVID furlough with a sharply reduced team; built and administered a Tableau Server environment on SQL Server data mart, owning content governance and data integrity across a multi-LOB reporting ecosystem.</li>
+        </ul>
+      </div>
+
+      <div class="exp-role-block">
+        <div class="exp-role-line">
+          <span class="exp-title">Senior Manager, Partner Center Operations &amp; Support</span>
+          <span class="exp-dates">2017 &ndash; 2018</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Managed offshore contact center vendor performance for Macy&rsquo;s Credit across Philippines-based partner sites; owned SLA accountability, contractual compliance, headcount management, and executive vendor relationships across operations teams of up to 50.</li>
+          <li>Produced workforce analytics and financial reporting to support ROI measurement and vendor contract management decisions.</li>
+        </ul>
+      </div>
+
+      <div class="exp-role-block">
+        <div class="exp-role-line">
+          <span class="exp-title">Senior Manager, Omnichannel Analytics &amp; Reporting</span>
+          <span class="exp-dates">2010 &ndash; 2017</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Built and scaled Macy&rsquo;s omnichannel analytics function from a single e-commerce focus to a multi-LOB reporting capability covering website, big-ticket/furniture sales, and credit support operations; grew the team and translated increasing stakeholder complexity into structured BI solutions across seven years of expanding scope.</li>
+          <li>Delivered service performance, customer experience, and automation analytics &mdash; establishing the cross-channel KPI framework later adopted across the broader retail customer service organization.</li>
+        </ul>
+      </div>
+
+      <div class="exp-role-block">
+        <div class="exp-role-line">
+          <span class="exp-title">Digital Big Ticket Manager</span>
+          <span class="exp-dates">2008 &ndash; 2010</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Built Macy&rsquo;s first intraday sales reporting capability for online Big Ticket using mainframe-based automation, creating real-time sales visibility that had not previously existed &mdash; including through Macy&rsquo;s first million-dollar online sales days.</li>
+        </ul>
+      </div>
+
+      <div class="exp-role-block">
+        <div class="exp-role-line">
+          <span class="exp-title">Digital Customer Service Associate &rarr; Trainer &rarr; Contact Center Lead</span>
+          <span class="exp-dates">2005 &ndash; 2008</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TECH -->
+  <div class="res-section">
+    <p class="res-section-label">Technology &amp; Tools</p>
+    <p class="tech-list">Power BI Desktop (8+ yrs) &nbsp;&middot;&nbsp; Tableau Desktop &amp; Server (11+ yrs) &nbsp;&middot;&nbsp; Snowflake &nbsp;&middot;&nbsp; SQL Server &nbsp;&middot;&nbsp; SQL/DAX &nbsp;&middot;&nbsp; Salesforce &nbsp;&middot;&nbsp; Gainsight &nbsp;&middot;&nbsp; Microsoft Excel &nbsp;&middot;&nbsp; MS Access &nbsp;&middot;&nbsp; Claude &nbsp;&middot;&nbsp; ChatGPT &nbsp;&middot;&nbsp; Microsoft Copilot &nbsp;&middot;&nbsp; Prompt Engineering &nbsp;&middot;&nbsp; Agentic Workflow Design &nbsp;&middot;&nbsp; Reporting Automation</p>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="res-section">
+    <p class="res-section-label">Education</p>
+    <div class="edu-line">
+      <span class="edu-degree">Bachelor of Arts in Economics</span>
+      <span class="edu-school">Colorado State University &middot; Fort Collins, CO</span>
+    </div>
+  </div>
+
+</div><!-- /resume-outer -->
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">&copy; 2026 Lumen Solutions LLC &middot; Oxford, OH</span>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/richardmwherry" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:rmwherry@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+  function toggleTheme() {
+    const html = document.documentElement;
+    const dark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', dark ? 'light' : 'dark');
+    document.getElementById('toggle-label').textContent = dark ? 'Dark' : 'Light';
+    document.getElementById('icon-moon').style.display = dark ? 'none' : '';
+    document.getElementById('icon-sun').style.display  = dark ? ''     : 'none';
+  }
+  function toggleMobile() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+</script>
+</body>
+</html>
