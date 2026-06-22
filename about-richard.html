@@ -87,85 +87,32 @@ nav {
 .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
 .nav-play { color: #2D50C8 !important; }
 .nav-play:hover { color: #6688ee !important; }
-.nav-actions { display: flex; align-items: center; gap: 14px; }
+.nav-actions { display: flex; align-items: center; gap: 10px; }
 .nav-toggle { display: flex; align-items: center; gap: 7px; background: var(--toggle-bg); border: 1px solid var(--toggle-border); border-radius: 100px; padding: 5px 12px; cursor: pointer; color: var(--text-tag); transition: background 0.3s; }
 .nav-toggle:hover { filter: brightness(1.15); }
 .nav-toggle svg { width: 13px; height: 13px; stroke: currentColor; }
 .nav-toggle-label { font-size: 10.5px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-tag); user-select: none; }
-.btn-talk { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-primary); border: 1px solid var(--btn-border); border-radius: 100px; padding: 8px 20px; text-decoration: none; transition: background 0.25s, color 0.25s, border-color 0.25s; white-space: nowrap; }
-.btn-talk:hover { background: var(--btn-fill); border-color: var(--btn-fill); color: #fff; }
+.btn-chat { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(210,205,255,0.95); border: 1px solid rgba(127,119,221,0.55); background: rgba(83,74,183,0.18); border-radius: 100px; padding: 8px 18px; text-decoration: none; transition: background 0.25s, border-color 0.25s; white-space: nowrap; }
+.btn-chat:hover { background: rgba(83,74,183,0.38); border-color: rgba(127,119,221,0.85); }
+[data-theme="light"] .btn-chat { color: #534ab7; border-color: rgba(83,74,183,0.4); background: rgba(83,74,183,0.08); }
+[data-theme="light"] .btn-chat:hover { background: rgba(83,74,183,0.18); }
+.btn-contact { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-primary); border: 1px solid var(--btn-border); border-radius: 100px; padding: 8px 18px; text-decoration: none; transition: background 0.25s, color 0.25s, border-color 0.25s; white-space: nowrap; }
+.btn-contact:hover { background: var(--btn-fill); border-color: var(--btn-fill); color: #fff; }
 .nav-hamburger { display: none; background: none; border: 1px solid var(--toggle-border); border-radius: 6px; padding: 6px 10px; cursor: pointer; color: var(--text-tag); font-size: 16px; }
-
-/* ── MOBILE MENU (APP TILE GRID) ── */
-.mobile-menu {
-  display: none;
-  position: fixed;
-  top: 64px; left: 0; right: 0;
-  background: var(--nav-bg);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--rule);
-  padding: 20px 20px 24px;
-  z-index: 999;
-  flex-direction: column;
-  gap: 10px;
-}
+/* ── MOBILE MENU ── */
+.mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--rule); padding: 16px 20px 20px; z-index: 999; flex-direction: column; gap: 6px; }
 .mobile-menu.open { display: flex; }
-.mm-slim {
-  display: flex; align-items: center; gap: 14px;
-  padding: 14px 18px; border-radius: 12px;
-  border: 0.5px solid rgba(45,80,200,0.3);
-  background: rgba(10,15,30,0.8);
-  text-decoration: none; color: var(--text-primary);
-  font-size: 13px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase;
-}
-.mm-slim i { font-size: 22px; color: var(--text-tag); }
-.mm-slim--play { color: #2D50C8; border-color: rgba(45,80,200,0.4); }
-.mm-slim--play i { color: #2D50C8; }
-.mm-slim-sub { font-size: 11px; letter-spacing: 0.14em; color: var(--text-tag); margin-left: 2px; }
-.mm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.mm-tile {
-  display: flex; flex-direction: column; gap: 10px;
-  padding: 20px 16px; border-radius: 14px;
-  border: 0.5px solid rgba(45,80,200,0.3);
-  background: rgba(10,15,30,0.8);
-  text-decoration: none; position: relative;
-}
-.mm-tile i { font-size: 22px; color: var(--text-tag); }
-.mm-tile-label { font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: var(--text-primary); }
-.mm-tile-desc { font-size: 11px; font-weight: 300; color: var(--text-tag); line-height: 1.4; }
-.mm-tile--chat { background: rgba(83,74,183,0.22); border: 1px solid rgba(127,119,221,0.65); }
-.mm-tile--chat i { color: rgba(170,160,255,0.9); }
-.mm-tile--chat .mm-tile-label { color: rgba(210,205,255,0.95); }
-.mm-tile--lumen { background: rgba(83,74,183,0.12); border: 0.5px solid rgba(127,119,221,0.35); }
-.mm-tile--lumen i { color: rgba(150,140,220,0.8); }
-.mm-ai-badge {
-  position: absolute; top: 12px; right: 12px;
-  background: rgba(127,119,221,0.28); border: 0.5px solid rgba(127,119,221,0.5);
-  border-radius: 6px; padding: 2px 7px;
-  font-size: 9px; font-weight: 600; letter-spacing: 0.12em; color: rgba(190,185,255,0.9);
-}
-.mm-cta {
-  display: block; padding: 16px 18px; border-radius: 12px;
-  background: rgba(45,80,200,0.14); border: 1px solid rgba(45,80,200,0.45);
-  text-decoration: none; color: var(--text-primary); margin-top: 4px;
-}
-.mm-cta-inner { display: flex; align-items: center; justify-content: space-between; }
-.mm-cta-left { display: flex; align-items: center; gap: 14px; }
-.mm-cta i { font-size: 20px; color: var(--text-tag); flex-shrink: 0; }
-.mm-cta-label { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; color: var(--text-primary); }
-.mm-cta-desc { font-size: 11px; font-weight: 300; color: var(--text-tag); margin-top: 2px; }
-.mm-cta-arrow { font-size: 18px; color: var(--text-tag); }
-[data-theme="light"] .mm-slim,
-[data-theme="light"] .mm-tile { background: rgba(240,244,255,0.9); border-color: rgba(18,38,110,0.2); }
-[data-theme="light"] .mm-tile--chat { background: rgba(83,74,183,0.08); border-color: rgba(83,74,183,0.3); }
-[data-theme="light"] .mm-tile--lumen { background: rgba(83,74,183,0.04); border-color: rgba(83,74,183,0.15); }
-[data-theme="light"] .mm-cta { background: rgba(18,38,110,0.06); border-color: rgba(18,38,110,0.25); }
-
-@media (max-width: 1100px) {
-  .nav-links, .nav-toggle { display: none; }
-  .nav-hamburger { display: block; }
-  nav { padding: 0 24px; }
-}
+.mm-item { display: flex; align-items: center; padding: 13px 18px; border-radius: 10px; text-decoration: none; color: var(--text-primary); font-size: 13px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; border: 0.5px solid rgba(45,80,200,0.2); transition: border-color 0.2s, background 0.2s; }
+.mm-item:hover { border-color: rgba(45,80,200,0.5); background: rgba(45,80,200,0.06); }
+.mm-item--chat { background: rgba(83,74,183,0.16); border-color: rgba(127,119,221,0.45); color: rgba(210,205,255,0.95); }
+.mm-item--chat:hover { background: rgba(83,74,183,0.28); border-color: rgba(127,119,221,0.7); }
+.mm-item--contact { background: rgba(45,80,200,0.12); border-color: rgba(45,80,200,0.4); }
+.mm-item--contact:hover { background: rgba(45,80,200,0.22); }
+.mm-item--play { color: #2D50C8; }
+[data-theme="light"] .mm-item { background: rgba(240,244,255,0.9); border-color: rgba(18,38,110,0.15); }
+[data-theme="light"] .mm-item--chat { background: rgba(83,74,183,0.08); border-color: rgba(83,74,183,0.25); color: #534ab7; }
+[data-theme="light"] .mm-item--contact { background: rgba(18,38,110,0.08); border-color: rgba(18,38,110,0.3); }
+@media (max-width: 1100px) { .nav-links { display: none; } .btn-chat, .btn-contact { display: none; } .nav-hamburger { display: block; } nav { padding: 0 24px; } }
 
 /* ── LAYOUT ── */
 .section-inner { max-width: 1100px; margin: 0 auto; padding: 100px 48px; }
@@ -333,286 +280,22 @@ footer { border-top: 1px solid var(--rule); padding: 32px 48px; max-width: 1100p
       </svg>
       <span class="nav-toggle-label" id="toggle-label">Light</span>
     </button>
-    <a class="btn-talk" href="contact.html">Contact Us</a>
+    <a class="btn-chat" href="chat.html">Chat with Lumen</a>
+    <a class="btn-contact" href="contact.html">Contact Us</a>
   </div>
   <button class="nav-hamburger" onclick="toggleMobile()" aria-label="Open menu">&#9776;</button>
 </nav>
 
 <div class="mobile-menu" id="mobile-menu" role="navigation">
-  <a href="index.html" class="mm-slim"><i class="ti ti-home"></i><span>Home</span></a>
-  <div class="mm-grid">
-    <a href="work.html" class="mm-tile">
-      <i class="ti ti-briefcase"></i>
-      <div class="mm-tile-label">What We Do</div>
-      <div class="mm-tile-desc">AI consulting, delivered</div>
-    </a>
-    <a href="chat.html" class="mm-tile mm-tile--chat">
-      <span class="mm-ai-badge">AI</span>
-      <i class="ti ti-message-circle"></i>
-      <div class="mm-tile-label">Chat with Lumen</div>
-      <div class="mm-tile-desc">Ask anything, anytime</div>
-    </a>
-  </div>
-  <div class="mm-grid">
-    <a href="about-richard.html" class="mm-tile">
-      <i class="ti ti-user"></i>
-      <div class="mm-tile-label">About Richard</div>
-      <div class="mm-tile-desc">Background &amp; highlights</div>
-    </a>
-    <a href="about-lumen.html" class="mm-tile mm-tile--lumen">
-      <i class="ti ti-sparkles"></i>
-      <div class="mm-tile-label">About Lumen</div>
-      <div class="mm-tile-desc">How I think &amp; work</div>
-    </a>
-  </div>
-  <a href="play.html" class="mm-slim mm-slim--play">
-    <i class="ti ti-device-gamepad"></i>
-    <span>Play</span>
-    <span class="mm-slim-sub">Space Invaders</span>
-  </a>
-  <a href="contact.html" class="mm-cta">
-    <div class="mm-cta-inner">
-      <div class="mm-cta-left">
-        <i class="ti ti-mail"></i>
-        <div>
-          <div class="mm-cta-label">Contact us</div>
-          <div class="mm-cta-desc">Richard &amp; Lumen, together</div>
-        </div>
-      </div>
-      <span class="mm-cta-arrow">&rarr;</span>
-    </div>
-  </a>
+  <a href="index.html" class="mm-item">Home</a>
+  <a href="work.html" class="mm-item">What We Do</a>
+  <a href="about-richard.html" class="mm-item">About Richard</a>
+  <a href="about-lumen.html" class="mm-item">About Lumen</a>
+  <a href="chat.html" class="mm-item mm-item--chat">Chat with Lumen</a>
+  <a href="play.html" class="mm-item mm-item--play">Play</a>
+  <a href="contact.html" class="mm-item mm-item--contact">Contact Us</a>
 </div>
 
-<!-- PAGE HERO -->
-<div class="page-hero">
-  <div class="section-inner">
-    <span class="section-label">About Richard</span>
-    <h1 class="page-title">Richard<br>Wherry</h1>
-    <p class="page-sub">Principal &middot; Lumen Solutions LLC</p>
-  </div>
-</div>
-
-<!-- PORTRAIT + STATS -->
-<div class="section-inner" style="padding-top: 0;">
-  <div class="section-rule"></div>
-
-  <div class="portrait-card">
-    <img src="images/richard-wherry.jpg" alt="Richard Wherry, Principal at Lumen Solutions LLC">
-    <div class="portrait-caption">
-      <div class="portrait-name">Richard Wherry</div>
-      <div class="portrait-title">Principal</div>
-    </div>
-  </div>
-
-  <div class="stat-shelf">
-    <div class="stat-cell">
-      <div class="stat-num">21</div>
-      <div class="stat-label">Years building analytics functions from scratch</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">200+</div>
-      <div class="stat-label">Power BI dashboard views across enterprise environments</div>
-    </div>
-    <div class="stat-cell">
-      <div class="stat-num">15%</div>
-      <div class="stat-label">Reduction in client loss revenue &mdash; one engagement, one year</div>
-    </div>
-  </div>
-
-  <!-- PHILOSOPHY -->
-  <span class="section-label">Philosophy</span>
-  <div class="prose-block" style="margin-bottom: 72px;">
-    <h3>The instinct came first.</h3>
-    <p>The data instinct started in 1994 &mdash; a kid in Anamosa, Iowa noticing that the numbers in a baseball simulation game told a story, if you knew how to read them. That impulse became the through-line for everything that followed: find the system, understand it underneath, make it visible and actionable.</p>
-    <p>Over 21 years at Macy&rsquo;s and Paycor, the tools changed. The instinct didn&rsquo;t. 200+ Power BI dashboards, a 12-person analyst team, metrics that actually moved the business. A 15% reduction in client loss revenue. First-contact resolution from 75% to 90%+ sustained. These weren&rsquo;t reporting projects &mdash; they were system interventions.</p>
-    <p>Lumen Solutions LLC is the same instinct applied directly: no org chart in the way, no layers between the problem and the work. Just a clear problem, a capable partner, and the minimum viable toolkit for the room you&rsquo;re about to walk into.</p>
-  </div>
-
-</div>
-
-<!-- RESUME CONTENT -->
-<div class="section-inner" style="padding-top: 0;">
-  <div class="section-rule"></div>
-  <span class="section-label">Full Background</span>
-
-  <div class="resume-block">
-
-    <!-- DOWNLOAD -->
-    <div class="download-bar">
-      <span class="download-label">Prefer a file? Download the full resume as a PDF.</span>
-      <a class="btn-download" href="RWherry_Resume_v8.pdf" download="RWherry_Resume.pdf">Download PDF</a>
-    </div>
-
-    <!-- SUMMARY -->
-    <div class="res-section">
-      <p class="res-section-label">Professional Summary</p>
-      <p class="res-summary">I turn messy, ambiguous operational data into decisions that move business metrics. Over 21 years at Macy&rsquo;s and Paycor, I built analytics functions from scratch, scaled them across enterprise CX and HCM environments, and led teams through two technology pivots. My record includes a 15% reduction in client loss revenue, first-contact resolution improved from 75% to 90%+ sustained, and a BI modernization program that rewired reporting across four business units. Currently applying that same instinct to AI consulting and agentic workflow design through Lumen Solutions LLC.</p>
-    </div>
-
-    <!-- COMPETENCIES -->
-    <div class="res-section">
-      <p class="res-section-label">Core Competencies</p>
-      <div class="comp-grid">
-        <div class="comp-group">
-          <h4>Leadership &amp; Delivery</h4>
-          <ul>
-            <li>Product &amp; Project Strategy</li>
-            <li>Agile / Scrum &middot; Waterfall</li>
-            <li>Analyst Team Leadership (12)</li>
-            <li>Operations Leadership (50)</li>
-            <li>Offshore &amp; Vendor Management</li>
-            <li>Contact Center Performance</li>
-            <li>Change Leadership</li>
-          </ul>
-        </div>
-        <div class="comp-group">
-          <h4>Analytics &amp; Technology</h4>
-          <ul>
-            <li>KPI Reporting &amp; Dashboarding</li>
-            <li>Power BI Architecture</li>
-            <li>Tableau Server Administration</li>
-            <li>Snowflake &middot; SQL Server &middot; SQL/DAX</li>
-            <li>Gainsight &middot; Salesforce CRM</li>
-            <li>BI Modernization Programs</li>
-            <li>Self-Service Analytics</li>
-          </ul>
-        </div>
-        <div class="comp-group">
-          <h4>AI &amp; Emerging Tech</h4>
-          <ul>
-            <li>Prompt Engineering</li>
-            <li>AI-Assisted Data Governance</li>
-            <li>Agentic Workflow Design</li>
-            <li>LLM Integration (Claude, Copilot)</li>
-            <li>AI Adoption &amp; Change Mgmt</li>
-            <li>Reporting Automation</li>
-            <li>AI-Native Product Development</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- EXPERIENCE -->
-    <div class="res-section">
-      <p class="res-section-label">Professional Experience</p>
-
-      <div class="exp-entry">
-        <p class="exp-employer">Lumen Solutions LLC &nbsp;&middot;&nbsp; Jun 2026 &ndash; Present</p>
-        <div class="exp-role-block">
-          <div class="exp-role-line">
-            <span class="exp-title">Founder &amp; Principal AI Consultant</span>
-            <span class="exp-dates">Jun 2026 &ndash; Present</span>
-          </div>
-          <ul class="exp-bullets">
-            <li>Deployed a custom Claude-powered AI assistant for a nonprofit client, enabling communications and donor relations leadership to accelerate major donor campaign development and employee handbook modernization &mdash; achieving daily active use within weeks of launch; end-to-end agentic workflow design from discovery through production deployment.</li>
-            <li>Engagement active; client in early deployment, applying the tool across donor listing and campaign communications workflows.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="exp-entry">
-        <p class="exp-employer">Paycor &nbsp;&middot;&nbsp; Apr 2022 &ndash; Jun 2026</p>
-        <div class="exp-role-block">
-          <div class="exp-role-line">
-            <span class="exp-title">Senior Manager, Client Experience Reporting &amp; Analytics</span>
-            <span class="exp-dates">Jun 2024 &ndash; Jun 2026</span>
-          </div>
-          <ul class="exp-bullets">
-            <li>Expanded scope from CX analytics to enterprise-wide: led reporting and analytics for all of Paycor, then served as analytics continuity lead through the Paychex acquisition (Apr 2025) &mdash; maintaining full dashboard and KPI cadences without interruption and onboarding Paychex stakeholders to Paycor reporting infrastructure.</li>
-            <li>Drove AI adoption across the analyst team: onboarded 10-person team onto Claude, Microsoft Copilot, ChatGPT/LibreChat, and Paychex internal AI tools, establishing AI-assisted workflows for documentation, data governance, and report automation.</li>
-            <li>Architected and maintained a five-workspace Power BI ecosystem (Service/CX, Success, Implementation, Leadership, Development) spanning 200+ active dashboard views connecting Gainsight, Salesforce, and Snowflake &mdash; including four executive dashboards and a custom implementation journey tracker with velocity-based forecasting capability.</li>
-            <li>Delivered on-demand custom analytical studies &mdash; A/B testing, retention analysis, case aging &mdash; through bespoke Snowflake connections, providing point-in-time intelligence unavailable through standard reporting pipelines.</li>
-          </ul>
-        </div>
-        <div class="exp-role-block">
-          <div class="exp-role-line">
-            <span class="exp-title">Manager, CX Reporting &amp; Analytics</span>
-            <span class="exp-dates">Apr 2022 &ndash; Jun 2024</span>
-          </div>
-          <ul class="exp-bullets">
-            <li>Served as centralized analytics and KPI reporting lead for four CX business units (Implementation, Customer Service, Client Success, Contact Center Support Operations); led a team of up to 10 domestic and offshore analysts and established the reporting infrastructure from the ground up.</li>
-            <li>Solutioned the company&rsquo;s first multi-channel first-contact resolution methodology &mdash; creating FCR visibility across voice, chat, and digital channels; within six months, sustained FCR improved from 75% to 90%+, meeting the executive target consistently through 2024.</li>
-            <li>Partnered with Engineering, Data Science, and Operations SMEs to design and measure a custom retention analytics initiative contributing directly to a 15% reduction in client loss revenue within the fiscal year, including ROI measurement and executive reporting supporting budget and performance decisions.</li>
-            <li>Introduced Agile intake and sprint governance as Product Owner for the analytics backlog &mdash; establishing readiness reviews, definitions of done, and effort estimates per sprint &mdash; freeing approximately 15% of team capacity for real-time triage and executive analysis.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="exp-entry">
-        <p class="exp-employer">Macy&rsquo;s, Inc. &nbsp;&middot;&nbsp; Jun 2005 &ndash; Apr 2022</p>
-        <div class="exp-role-block">
-          <div class="exp-role-line">
-            <span class="exp-title">Senior Manager, Business Intelligence</span>
-            <span class="exp-dates">2018 &ndash; 2022</span>
-          </div>
-          <ul class="exp-bullets">
-            <li>Owned the BI product lifecycle for Macy&rsquo;s Retail customer service operations &mdash; website, big-ticket, credit, and fulfillment &mdash; delivering KPI dashboards, scorecards, and financial reports via Tableau Server and Power BI.</li>
-            <li>Built and led a 12-person analyst team (domestic + offshore in Philippines and India), managing a prioritized backlog of large-scale dashboard builds and financial reports, partnering with Engineering and Operations from scoping through delivery.</li>
-            <li>Maintained reporting continuity through the 2020 COVID furlough with a sharply reduced team; built and administered a Tableau Server environment on SQL Server data mart, owning content governance and data integrity across a multi-LOB reporting ecosystem.</li>
-          </ul>
-        </div>
-        <div class="exp-role-block">
-          <div class="exp-role-line">
-            <span class="exp-title">Senior Manager, Partner Center Operations &amp; Support</span>
-            <span class="exp-dates">2017 &ndash; 2018</span>
-          </div>
-          <ul class="exp-bullets">
-            <li>Managed offshore contact center vendor performance for Macy&rsquo;s Credit across Philippines-based partner sites; owned SLA accountability, contractual compliance, headcount management, and executive vendor relationships across operations teams of up to 50.</li>
-            <li>Produced workforce analytics and financial reporting to support ROI measurement and vendor contract management decisions.</li>
-          </ul>
-        </div>
-        <div class="exp-role-block">
-          <div class="exp-role-line">
-            <span class="exp-title">Senior Manager, Omnichannel Analytics &amp; Reporting</span>
-            <span class="exp-dates">2010 &ndash; 2017</span>
-          </div>
-          <ul class="exp-bullets">
-            <li>Built and scaled Macy&rsquo;s omnichannel analytics function from a single e-commerce focus to a multi-LOB reporting capability covering website, big-ticket/furniture sales, and credit support operations; grew the team and translated increasing stakeholder complexity into structured BI solutions across seven years of expanding scope.</li>
-            <li>Delivered service performance, customer experience, and automation analytics &mdash; establishing the cross-channel KPI framework later adopted across the broader retail customer service organization.</li>
-          </ul>
-        </div>
-        <div class="exp-role-block">
-          <div class="exp-role-line">
-            <span class="exp-title">Digital Big Ticket Manager</span>
-            <span class="exp-dates">2008 &ndash; 2010</span>
-          </div>
-          <ul class="exp-bullets">
-            <li>Built Macy&rsquo;s first intraday sales reporting capability for online Big Ticket using mainframe-based automation, creating real-time sales visibility that had not previously existed &mdash; including through Macy&rsquo;s first million-dollar online sales days.</li>
-          </ul>
-        </div>
-        <div class="exp-role-block">
-          <div class="exp-role-line">
-            <span class="exp-title">Digital Customer Service Associate &rarr; Trainer &rarr; Contact Center Lead</span>
-            <span class="exp-dates">2005 &ndash; 2008</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TECH -->
-    <div class="res-section">
-      <p class="res-section-label">Technology &amp; Tools</p>
-      <p class="tech-list">Power BI Desktop (8+ yrs) &nbsp;&middot;&nbsp; Tableau Desktop &amp; Server (11+ yrs) &nbsp;&middot;&nbsp; Snowflake &nbsp;&middot;&nbsp; SQL Server &nbsp;&middot;&nbsp; SQL/DAX &nbsp;&middot;&nbsp; Salesforce &nbsp;&middot;&nbsp; Gainsight &nbsp;&middot;&nbsp; Microsoft Excel &nbsp;&middot;&nbsp; MS Access &nbsp;&middot;&nbsp; Claude &nbsp;&middot;&nbsp; ChatGPT &nbsp;&middot;&nbsp; Microsoft Copilot &nbsp;&middot;&nbsp; Prompt Engineering &nbsp;&middot;&nbsp; Agentic Workflow Design &nbsp;&middot;&nbsp; Reporting Automation</p>
-    </div>
-
-    <!-- EDUCATION -->
-    <div class="res-section">
-      <p class="res-section-label">Education</p>
-      <div class="edu-line">
-        <span class="edu-degree">Bachelor of Arts in Economics</span>
-        <span class="edu-school">Colorado State University &middot; Fort Collins, CO</span>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- YIN/YANG CTA -->
-  <a class="yinyang-cta" href="about-lumen.html">Meet my partner &rarr;</a>
-
-</div>
-
-<!-- FOOTER -->
 <footer>
   <span class="footer-copy">&copy; 2026 Lumen Solutions LLC &middot; Oxford, OH</span>
   <div class="footer-links">
