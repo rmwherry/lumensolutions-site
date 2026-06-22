@@ -6,6 +6,7 @@
 <title>Lumen Solutions LLC</title>
 <meta name="description" content="Practical AI consulting for organizations that need it done right. Advise. Deliver. Embed.">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <style>
 
 /* ── RESET ── */
@@ -197,27 +198,40 @@ nav {
   font-size: 16px;
 }
 .mobile-menu {
-  display: none;
-  position: fixed;
-  top: 64px; left: 0; right: 0;
-  background: var(--nav-bg);
-  backdrop-filter: blur(20px);
+  display: none; position: fixed; top: 64px; left: 0; right: 0;
+  background: var(--nav-bg); backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--rule);
-  padding: 28px 32px;
-  z-index: 999;
-  flex-direction: column;
-  gap: 22px;
+  padding: 20px 20px 24px; z-index: 999;
+  flex-direction: column; gap: 10px;
 }
 .mobile-menu.open { display: flex; }
-.mobile-menu a {
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--text-tag);
-  text-decoration: none;
-}
-.mobile-menu a:hover { color: var(--text-primary); }
+.mm-slim { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-radius: 12px; border: 0.5px solid rgba(45,80,200,0.3); background: rgba(10,15,30,0.8); text-decoration: none; color: var(--text-primary); font-size: 13px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; }
+.mm-slim i { font-size: 22px; color: var(--text-tag); }
+.mm-slim--play { color: #2D50C8; border-color: rgba(45,80,200,0.4); }
+.mm-slim--play i { color: #2D50C8; }
+.mm-slim-sub { font-size: 11px; letter-spacing: 0.14em; color: var(--text-tag); margin-left: 2px; }
+.mm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.mm-tile { display: flex; flex-direction: column; gap: 10px; padding: 20px 16px; border-radius: 14px; border: 0.5px solid rgba(45,80,200,0.3); background: rgba(10,15,30,0.8); text-decoration: none; position: relative; }
+.mm-tile i { font-size: 22px; color: var(--text-tag); }
+.mm-tile-label { font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: var(--text-primary); }
+.mm-tile-desc { font-size: 11px; font-weight: 300; color: var(--text-tag); line-height: 1.4; }
+.mm-tile--chat { background: rgba(83,74,183,0.22); border: 1px solid rgba(127,119,221,0.65); }
+.mm-tile--chat i { color: rgba(170,160,255,0.9); }
+.mm-tile--chat .mm-tile-label { color: rgba(210,205,255,0.95); }
+.mm-tile--lumen { background: rgba(83,74,183,0.12); border: 0.5px solid rgba(127,119,221,0.35); }
+.mm-tile--lumen i { color: rgba(150,140,220,0.8); }
+.mm-ai-badge { position: absolute; top: 12px; right: 12px; background: rgba(127,119,221,0.28); border: 0.5px solid rgba(127,119,221,0.5); border-radius: 6px; padding: 2px 7px; font-size: 9px; font-weight: 600; letter-spacing: 0.12em; color: rgba(190,185,255,0.9); }
+.mm-cta { display: block; padding: 16px 18px; border-radius: 12px; background: rgba(45,80,200,0.14); border: 1px solid rgba(45,80,200,0.45); text-decoration: none; color: var(--text-primary); margin-top: 4px; }
+.mm-cta-inner { display: flex; align-items: center; justify-content: space-between; }
+.mm-cta-left { display: flex; align-items: center; gap: 14px; }
+.mm-cta i { font-size: 20px; color: var(--text-tag); flex-shrink: 0; }
+.mm-cta-label { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; color: var(--text-primary); }
+.mm-cta-desc { font-size: 11px; font-weight: 300; color: var(--text-tag); margin-top: 2px; }
+.mm-cta-arrow { font-size: 18px; color: var(--text-tag); }
+[data-theme="light"] .mm-slim, [data-theme="light"] .mm-tile { background: rgba(240,244,255,0.9); border-color: rgba(18,38,110,0.2); }
+[data-theme="light"] .mm-tile--chat { background: rgba(83,74,183,0.08); border-color: rgba(83,74,183,0.3); }
+[data-theme="light"] .mm-tile--lumen { background: rgba(83,74,183,0.04); border-color: rgba(83,74,183,0.15); }
+[data-theme="light"] .mm-cta { background: rgba(18,38,110,0.06); border-color: rgba(18,38,110,0.25); }
 
 @media (max-width: 1100px) {
   .nav-links, .nav-toggle { display: none; }
@@ -255,7 +269,7 @@ nav {
 
 /* ── HERO ── */
 .hero {
-  min-height: 100vh;
+  min-height: 70vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -592,10 +606,10 @@ footer {
   <ul class="nav-links" role="list">
     <li><a href="index.html" class="active">Home</a></li>
     <li><a href="work.html">What We Do</a></li>
-    <li><a href="about.html">About Us</a></li>
-    <li><a href="resume.html">Richard&rsquo;s Resume</a></li>
+    <li><a href="about-richard.html">About Richard</a></li>
+    <li><a href="about-lumen.html">About Lumen</a></li>
     <li><a href="chat.html">Chat with Lumen</a></li>
-    <li><a href="play.html" class="nav-play">Play Space Invaders &mdash; Lumen Edition</a></li>
+    <li><a href="play.html" class="nav-play">Play</a></li>
   </ul>
   <div class="nav-actions">
     <button class="nav-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark">
@@ -615,19 +629,55 @@ footer {
       </svg>
       <span class="nav-toggle-label" id="toggle-label">Light</span>
     </button>
-    <a class="btn-talk" href="chat.html">Working on something?</a>
+    <a class="btn-talk" href="contact.html">Contact Us</a>
   </div>
   <button class="nav-hamburger" onclick="toggleMobile()" aria-label="Open menu">&#9776;</button>
 </nav>
 
 <div class="mobile-menu" id="mobile-menu" role="navigation">
-  <a href="index.html">Home</a>
-  <a href="work.html">What We Do</a>
-  <a href="about.html">About Us</a>
-  <a href="resume.html">Richard&rsquo;s Resume</a>
-  <a href="chat.html">Chat with Lumen</a>
-  <a href="play.html" style="color:#2D50C8">Play Space Invaders &mdash; Lumen Edition</a>
-  <a href="chat.html" style="color:var(--text-primary);margin-top:8px">Working on something? &rarr;</a>
+  <a href="index.html" class="mm-slim"><i class="ti ti-home"></i><span>Home</span></a>
+  <div class="mm-grid">
+    <a href="work.html" class="mm-tile">
+      <i class="ti ti-briefcase"></i>
+      <div class="mm-tile-label">What We Do</div>
+      <div class="mm-tile-desc">AI consulting, delivered</div>
+    </a>
+    <a href="chat.html" class="mm-tile mm-tile--chat">
+      <span class="mm-ai-badge">AI</span>
+      <i class="ti ti-message-circle"></i>
+      <div class="mm-tile-label">Chat with Lumen</div>
+      <div class="mm-tile-desc">Ask anything, anytime</div>
+    </a>
+  </div>
+  <div class="mm-grid">
+    <a href="about-richard.html" class="mm-tile">
+      <i class="ti ti-user"></i>
+      <div class="mm-tile-label">About Richard</div>
+      <div class="mm-tile-desc">Background &amp; highlights</div>
+    </a>
+    <a href="about-lumen.html" class="mm-tile mm-tile--lumen">
+      <i class="ti ti-sparkles"></i>
+      <div class="mm-tile-label">About Lumen</div>
+      <div class="mm-tile-desc">How I think &amp; work</div>
+    </a>
+  </div>
+  <a href="play.html" class="mm-slim mm-slim--play">
+    <i class="ti ti-device-gamepad"></i>
+    <span>Play</span>
+    <span class="mm-slim-sub">Space Invaders</span>
+  </a>
+  <a href="contact.html" class="mm-cta">
+    <div class="mm-cta-inner">
+      <div class="mm-cta-left">
+        <i class="ti ti-mail"></i>
+        <div>
+          <div class="mm-cta-label">Contact us</div>
+          <div class="mm-cta-desc">Richard &amp; Lumen, together</div>
+        </div>
+      </div>
+      <span class="mm-cta-arrow">&rarr;</span>
+    </div>
+  </a>
 </div>
 
 <!-- HERO -->

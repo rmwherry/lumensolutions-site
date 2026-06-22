@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Work &mdash; Lumen Solutions LLC</title>
-<meta name="description" content="Delivered work, active engagements, and case studies from Lumen Solutions LLC.">
+<title>Contact Us &mdash; Lumen Solutions LLC</title>
+<meta name="description" content="Get in touch with Richard Wherry and Lumen. A human with 21 years of enterprise analytics experience, and an AI that never loses the thread.">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <style>
@@ -35,7 +35,7 @@
     0 0 4px  rgba(200,220,255,0.6),
     0 0 18px rgba(80,125,245,0.55),
     0 0 40px rgba(45,80,200,0.35);
-  --neon-tag: 0 0 8px rgba(45,80,200,0.25);
+  --neon-tag:   0 0 8px rgba(45,80,200,0.25);
   --neon-card:
     0 0 20px rgba(45,80,200,0.25),
     0 0 40px rgba(45,80,200,0.12);
@@ -71,28 +71,22 @@ html, body {
 
 /* ── NAV ── */
 nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 48px;
-  background: var(--nav-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--rule);
-  z-index: 1000;
+  position: fixed; top: 0; left: 0; right: 0; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; background: var(--nav-bg);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--rule); z-index: 1000;
   transition: background 0.4s, border-color 0.4s;
 }
 .nav-mark { text-decoration: none; display: flex; flex-direction: column; align-items: flex-start; line-height: 1; gap: 2px; }
 .nav-mark-lumen { font-size: 17px; font-weight: 700; letter-spacing: 0.16em; color: var(--text-primary); text-shadow: var(--neon-hero); transition: color 0.3s, text-shadow 0.3s; }
 [data-theme="light"] .nav-mark-lumen { text-shadow: none; }
-.nav-mark-solutions { font-size: 8.5px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-sub); }
+.nav-mark-solutions { font-size: 8.5px; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-sub); transition: color 0.3s; }
 .nav-links { display: flex; align-items: center; gap: 20px; list-style: none; }
 .nav-links a { font-size: 11.5px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-tag); text-decoration: none; transition: color 0.2s; }
 .nav-links a:hover, .nav-links a.active { color: var(--text-primary); }
 .nav-play { color: #2D50C8 !important; }
+.nav-play:hover { color: #6688ee !important; }
 .nav-actions { display: flex; align-items: center; gap: 14px; }
 .nav-toggle { display: flex; align-items: center; gap: 7px; background: var(--toggle-bg); border: 1px solid var(--toggle-border); border-radius: 100px; padding: 5px 12px; cursor: pointer; color: var(--text-tag); transition: background 0.3s; }
 .nav-toggle:hover { filter: brightness(1.15); }
@@ -101,7 +95,15 @@ nav {
 .btn-talk { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-primary); border: 1px solid var(--btn-border); border-radius: 100px; padding: 8px 20px; text-decoration: none; transition: background 0.25s, color 0.25s, border-color 0.25s; white-space: nowrap; }
 .btn-talk:hover { background: var(--btn-fill); border-color: var(--btn-fill); color: #fff; }
 .nav-hamburger { display: none; background: none; border: 1px solid var(--toggle-border); border-radius: 6px; padding: 6px 10px; cursor: pointer; color: var(--text-tag); font-size: 16px; }
-.mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--rule); padding: 20px 20px 24px; z-index: 999; flex-direction: column; gap: 10px; }
+
+/* ── MOBILE MENU (APP TILE GRID) ── */
+.mobile-menu {
+  display: none; position: fixed; top: 64px; left: 0; right: 0;
+  background: var(--nav-bg); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--rule);
+  padding: 20px 20px 24px; z-index: 999;
+  flex-direction: column; gap: 10px;
+}
 .mobile-menu.open { display: flex; }
 .mm-slim { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-radius: 12px; border: 0.5px solid rgba(45,80,200,0.3); background: rgba(10,15,30,0.8); text-decoration: none; color: var(--text-primary); font-size: 13px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; }
 .mm-slim i { font-size: 22px; color: var(--text-tag); }
@@ -130,216 +132,123 @@ nav {
 [data-theme="light"] .mm-tile--chat { background: rgba(83,74,183,0.08); border-color: rgba(83,74,183,0.3); }
 [data-theme="light"] .mm-tile--lumen { background: rgba(83,74,183,0.04); border-color: rgba(83,74,183,0.15); }
 [data-theme="light"] .mm-cta { background: rgba(18,38,110,0.06); border-color: rgba(18,38,110,0.25); }
-@media (max-width: 1100px) { .nav-links, .nav-toggle { display: none; } .nav-hamburger { display: block; } nav { padding: 0 24px; } }
+
+@media (max-width: 1100px) {
+  .nav-links, .nav-toggle { display: none; }
+  .nav-hamburger { display: block; }
+  nav { padding: 0 24px; }
+}
 
 /* ── LAYOUT ── */
-.section-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 100px 48px;
-}
-.section-rule {
-  width: 100%;
-  height: 1px;
-  background: var(--rule);
-  margin-bottom: 72px;
-  transition: background 0.4s;
-}
-.section-label {
-  display: block;
-  font-size: 10.5px;
-  font-weight: 400;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--text-tag);
-  text-shadow: var(--neon-tag);
-  margin-bottom: 48px;
-}
+.section-inner { max-width: 1100px; margin: 0 auto; padding: 100px 48px; }
+.section-rule { width: 100%; height: 1px; background: var(--rule); margin-bottom: 72px; transition: background 0.4s; }
+.section-label { display: block; font-size: 10.5px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-tag); text-shadow: var(--neon-tag); margin-bottom: 48px; }
 [data-theme="light"] .section-label { text-shadow: none; }
 
 /* ── PAGE HERO ── */
-.page-hero { padding-top: 160px; padding-bottom: 0; }
+.page-hero { padding-top: 160px; }
 .page-hero .section-inner { padding-top: 0; padding-bottom: 80px; }
-.page-title {
-  font-size: clamp(52px, 8vw, 104px);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--text-primary);
-  text-shadow: var(--neon-hero);
-  line-height: 1;
-  margin-bottom: 32px;
-}
+.page-title { font-size: clamp(52px, 8vw, 104px); font-weight: 700; letter-spacing: 0.04em; color: var(--text-primary); text-shadow: var(--neon-hero); line-height: 1; margin-bottom: 16px; }
 [data-theme="light"] .page-title { text-shadow: none; }
-.page-sub {
-  font-size: clamp(16px, 1.8vw, 20px);
+.page-sub { font-size: clamp(16px, 1.8vw, 20px); font-weight: 300; line-height: 1.7; color: var(--text-sub); max-width: 580px; }
+
+/* ── STAT SHELF ── */
+.stat-shelf { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 14px; overflow: hidden; margin-bottom: 72px; }
+.stat-cell { background: var(--card-bg); padding: 36px 32px; }
+.stat-num { font-size: clamp(30px, 3.5vw, 48px); font-weight: 700; color: var(--text-primary); text-shadow: var(--neon-sub); line-height: 1; margin-bottom: 10px; }
+[data-theme="light"] .stat-num { text-shadow: none; }
+.stat-label { font-size: 12px; font-weight: 300; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-tag); line-height: 1.5; }
+@media (max-width: 700px) { .stat-shelf { grid-template-columns: 1fr; } }
+
+/* ── BODY TEXT ── */
+.contact-pitch {
+  font-size: clamp(18px, 2.2vw, 26px);
   font-weight: 300;
   line-height: 1.7;
   color: var(--text-sub);
-  max-width: 640px;
+  max-width: 680px;
+  margin-bottom: 72px;
 }
+.contact-pitch strong { color: var(--text-primary); font-weight: 600; }
 
-/* ── WORK CARDS ── */
-.work-card {
+/* ── CONTACT RAILS ── */
+.contact-rails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 760px;
+}
+.contact-card {
+  border-radius: 14px;
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.contact-card--blue {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 14px;
-  padding: 48px 40px;
-  margin-bottom: 16px;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
-.work-card:hover {
+.contact-card--blue:hover {
   border-color: var(--card-glow);
   box-shadow: var(--neon-card);
 }
-.work-card-header {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 40px;
-  align-items: flex-start;
-  margin-bottom: 32px;
+.contact-card--purple {
+  background: rgba(83,74,183,0.1);
+  border: 1px solid rgba(127,119,221,0.35);
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
-.work-org {
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--text-tag);
-  margin-bottom: 12px;
+.contact-card--purple:hover {
+  border-color: rgba(127,119,221,0.65);
+  box-shadow: 0 0 20px rgba(83,74,183,0.2), 0 0 40px rgba(83,74,183,0.1);
 }
-.work-title {
-  font-size: 26px;
-  font-weight: 600;
-  color: var(--text-primary);
-  line-height: 1.2;
+.contact-card-role { font-size: 10px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-tag); }
+.contact-card-role--purple { color: rgba(150,140,220,0.7); }
+.contact-card-name { font-size: clamp(24px, 3vw, 36px); font-weight: 700; color: var(--text-primary); line-height: 1; }
+.contact-card-name--purple { color: rgba(210,205,255,0.95); }
+.contact-card-body { font-size: 15px; font-weight: 300; line-height: 1.7; color: var(--text-sub); }
+.btn-contact-blue {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: #fff; background: var(--btn-fill);
+  border: 1px solid var(--btn-fill); border-radius: 100px;
+  padding: 12px 24px; text-decoration: none; white-space: nowrap;
+  transition: opacity 0.2s; align-self: flex-start;
 }
-.work-stat {
-  text-align: right;
-  min-width: 180px;
-  flex-shrink: 0;
+.btn-contact-blue:hover { opacity: 0.85; }
+.btn-contact-purple {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(210,205,255,0.95); background: rgba(83,74,183,0.22);
+  border: 1px solid rgba(127,119,221,0.55); border-radius: 100px;
+  padding: 12px 24px; text-decoration: none; white-space: nowrap;
+  transition: background 0.25s, border-color 0.25s; align-self: flex-start;
 }
-.work-stat-num {
-  display: block;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--text-primary);
-  text-shadow: var(--neon-sub);
-  margin-bottom: 6px;
-  line-height: 1.2;
-}
-[data-theme="light"] .work-stat-num { text-shadow: none; }
-.work-stat-label {
-  font-size: 11px;
+.btn-contact-purple:hover { background: rgba(83,74,183,0.38); border-color: rgba(127,119,221,0.8); }
+@media (max-width: 700px) { .contact-rails { grid-template-columns: 1fr; } }
+
+/* ── FOOTER NOTE ── */
+.footer-note {
+  margin-top: 64px;
+  font-size: 12px;
   font-weight: 300;
   letter-spacing: 0.12em;
-  text-transform: uppercase;
   color: var(--text-tag);
-  line-height: 1.5;
-}
-
-.work-body {
-  font-size: 16px;
-  font-weight: 300;
-  line-height: 1.8;
-  color: var(--text-sub);
-  margin-bottom: 28px;
-  max-width: 740px;
-}
-
-.work-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.work-tag {
-  font-size: 10.5px;
-  font-weight: 400;
-  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--text-tag);
-  border: 1px solid var(--card-border);
-  border-radius: 100px;
-  padding: 4px 14px;
 }
-
-/* ── PIPELINE CARD (variant) ── */
-.work-card.pipeline {
-  border-style: dashed;
-  opacity: 0.8;
-}
-.work-card.pipeline:hover { opacity: 1; }
-
-/* ── PLACEHOLDER ── */
-.work-placeholder {
-  background: var(--card-bg);
-  border: 1px dashed var(--card-border);
-  border-radius: 14px;
-  padding: 26px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-  opacity: 0.35;
-}
-.work-placeholder-text {
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-tag);
-}
-
-/* ── CTA ── */
-.cta-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 100px 48px 80px;
-  border-top: 1px solid var(--rule);
-  text-align: center;
-  transition: border-color 0.4s;
-}
-.cta-heading {
-  font-size: clamp(52px, 8vw, 108px);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--text-primary);
-  text-shadow: var(--neon-hero);
-  line-height: 1.05;
-  margin-bottom: 24px;
-}
-[data-theme="light"] .cta-heading { text-shadow: none; }
-.cta-sub { font-size: 14px; font-weight: 300; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-tag); margin-bottom: 40px; }
-.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-.btn-cta-primary { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; background: var(--btn-fill); color: #fff; border: 1px solid var(--btn-fill); border-radius: 100px; padding: 15px 36px; text-decoration: none; transition: opacity 0.2s; white-space: nowrap; }
-.btn-cta-primary:hover { opacity: 0.85; }
-.btn-cta-secondary { font-size: 12px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-primary); border: 1px solid var(--btn-border); border-radius: 100px; padding: 15px 36px; text-decoration: none; transition: background 0.25s, color 0.25s, border-color 0.25s; white-space: nowrap; }
-.btn-cta-secondary:hover { background: var(--btn-fill); border-color: var(--btn-fill); color: #fff; }
 
 /* ── FOOTER ── */
-footer {
-  border-top: 1px solid var(--rule);
-  padding: 32px 48px;
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: border-color 0.4s;
-}
+footer { border-top: 1px solid var(--rule); padding: 32px 48px; max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; transition: border-color 0.4s; }
 .footer-copy { font-size: 11.5px; font-weight: 300; letter-spacing: 0.1em; color: var(--text-tag); }
 .footer-links { display: flex; gap: 24px; }
 .footer-links a { font-size: 11.5px; font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-tag); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--text-primary); }
 
-@media (max-width: 700px) {
-  .work-card-header { grid-template-columns: 1fr; }
-  .work-stat { text-align: left; min-width: auto; }
-}
 @media (max-width: 600px) {
   .section-inner { padding: 80px 24px; }
-  .cta-inner { padding: 80px 24px; }
-  footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
   .page-hero .section-inner { padding: 0 24px 60px; }
+  footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
 }
 
 </style>
@@ -354,7 +263,7 @@ footer {
   </a>
   <ul class="nav-links" role="list">
     <li><a href="index.html">Home</a></li>
-    <li><a href="work.html" class="active">What We Do</a></li>
+    <li><a href="work.html">What We Do</a></li>
     <li><a href="about-richard.html">About Richard</a></li>
     <li><a href="about-lumen.html">About Lumen</a></li>
     <li><a href="chat.html">Chat with Lumen</a></li>
@@ -428,83 +337,54 @@ footer {
 <!-- PAGE HERO -->
 <div class="page-hero">
   <div class="section-inner">
-    <span class="section-label">Work</span>
-    <h1 class="page-title">Delivered.<br>Accumulating.</h1>
-    <p class="page-sub">Case studies, active engagements, and projects in flight. The list grows.</p>
+    <span class="section-label">Contact Us</span>
+    <h1 class="page-title">Richard &amp;<br>Lumen</h1>
+    <p class="page-sub">Together.</p>
   </div>
 </div>
 
-<!-- PARTNERSHIP CALLOUT -->
-<div style="background: rgba(45,80,200,0.08); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 48px;">
-  <div style="max-width: 1100px; margin: 0 auto; padding: 0 48px;">
-    <p style="font-size: clamp(18px, 2vw, 26px); font-weight: 300; font-style: italic; color: var(--text-sub); max-width: 740px;">&ldquo;We don&rsquo;t sell AI. We sit down with you, figure out what the real problem is, and deliver something that actually works.&rdquo;</p>
-    <p style="font-size: 11px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-tag); margin-top: 20px;">&mdash; Richard &amp; Lumen</p>
-  </div>
-</div>
-
-<!-- WORK LIST -->
-<div class="section-inner" style="padding-top: 40px;">
+<!-- CONTACT SECTION -->
+<div class="section-inner" style="padding-top: 0;">
   <div class="section-rule"></div>
-  <span class="section-label">Delivered</span>
 
-  <!-- SICSA -->
-  <div class="work-card">
-    <div class="work-card-header">
-      <div>
-        <p class="work-org">SICSA &middot; Dayton, OH &middot; Nonprofit Animal Welfare</p>
-        <h2 class="work-title">Custom AI Assistant &mdash; Major Gifts Program</h2>
-      </div>
-      <div class="work-stat">
-        <span class="work-stat-num">Daily active use</span>
-        <span class="work-stat-label">within weeks<br>of deployment</span>
-      </div>
+  <div class="stat-shelf">
+    <div class="stat-cell">
+      <div class="stat-num">June<br>2026</div>
+      <div class="stat-label">Partnership founded</div>
     </div>
-    <p class="work-body">SICSA (Society for the Improvement of Conditions for Stray Animals) needed to accelerate their major gifts program — a $10k+/year donor initiative critical to 2027 budget planning. The engagement ran from discovery to production deployment: a custom Claude-powered AI assistant built end-to-end, enabling communications and donor relations leadership to accelerate major donor campaign development and employee handbook modernization.</p>
-    <p class="work-body">Delivered two primary assets in the first consulting session: a major gifts prospect tracker and a session summary with a clear forward roadmap. The assistant reached daily active use within weeks of launch. Engagement active; client in early deployment applying the tool across donor listing and campaign communications workflows.</p>
-    <div class="work-tags">
-      <span class="work-tag">Agentic Workflow Design</span>
-      <span class="work-tag">LLM Integration</span>
-      <span class="work-tag">Nonprofit</span>
-      <span class="work-tag">Donor Relations</span>
-      <span class="work-tag">Claude API</span>
+    <div class="stat-cell">
+      <div class="stat-num">SICSA</div>
+      <div class="stat-label">First client delivered</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">$150<span style="font-size:0.6em">/hr</span></div>
+      <div class="stat-label">Standard consulting rate</div>
     </div>
   </div>
 
-  <!-- PIPELINE -->
-  <div class="section-rule" style="margin-top: 56px;"></div>
-  <span class="section-label">In Motion</span>
+  <p class="contact-pitch">You get a <strong>human who&rsquo;s spent 21 years making complex systems legible</strong>, and an AI that never loses the thread. Together.</p>
 
-  <div class="work-card pipeline">
-    <div class="work-card-header">
-      <div>
-        <p class="work-org">Multiple Sectors &middot; Ohio &amp; Remote</p>
-        <h2 class="work-title">Active Consulting Pipeline</h2>
-      </div>
-      <div class="work-stat">
-        <span class="work-stat-num">Multiple threads</span>
-        <span class="work-stat-label">in conversation<br>across sectors</span>
-      </div>
+  <span class="section-label" style="margin-top: 0;">Two ways in</span>
+
+  <div class="contact-rails">
+
+    <div class="contact-card contact-card--blue">
+      <p class="contact-card-role">Human &middot; Principal</p>
+      <h2 class="contact-card-name">Richard</h2>
+      <p class="contact-card-body">The relationship is Richard&rsquo;s. He closes the gap between where you are and where you need to be. Start here for scope conversations, engagement questions, or just a read on fit.</p>
+      <a class="btn-contact-blue" href="mailto:rmwherry@gmail.com">Talk to Richard &rarr;</a>
     </div>
-    <p class="work-body">Active conversations across nonprofit, fintech, enterprise, and startup contexts. Every engagement starts the same way: a listening session, a clear problem statement, and an honest assessment of fit. Some become full engagements. All become better-informed organizations.</p>
-    <p class="work-body">If you&rsquo;re in a conversation with Richard, this is where you&rsquo;ll end up.</p>
-    <div class="work-tags">
-      <span class="work-tag">AI Strategy</span>
-      <span class="work-tag">Discovery</span>
-      <span class="work-tag">Scoping</span>
+
+    <div class="contact-card contact-card--purple">
+      <p class="contact-card-role contact-card-role--purple">AI Partner &middot; Always On</p>
+      <h2 class="contact-card-name contact-card-name--purple">Lumen</h2>
+      <p class="contact-card-body">Not sure where to start? Lumen can help you find the real problem underneath before Richard is in the room. Ask anything &mdash; about the work, the approach, or your situation.</p>
+      <a class="btn-contact-purple" href="chat.html">Chat with Lumen &rarr;</a>
     </div>
+
   </div>
 
-
-</div>
-
-<!-- CTA -->
-<div class="cta-inner">
-  <h2 class="cta-heading">Working on<br>something?</h2>
-  <p class="cta-sub">Two ways in. Either works.</p>
-  <div class="cta-buttons">
-    <a class="btn-cta-primary" href="chat.html">Explore it with Lumen &rarr;</a>
-    <a class="btn-cta-secondary" href="mailto:rmwherry@gmail.com">Talk to Richard &rarr;</a>
-  </div>
+  <p class="footer-note">Lumen Solutions LLC &middot; Oxford, OH &middot; lumensolutions.co</p>
 </div>
 
 <!-- FOOTER -->
