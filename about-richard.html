@@ -98,7 +98,7 @@ nav {
 [data-theme="light"] .btn-chat:hover { background: rgba(83,74,183,0.18); }
 .btn-contact { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-primary); border: 1px solid var(--btn-border); border-radius: 100px; padding: 8px 18px; text-decoration: none; transition: background 0.25s, color 0.25s, border-color 0.25s; white-space: nowrap; }
 .btn-contact:hover { background: var(--btn-fill); border-color: var(--btn-fill); color: #fff; }
-.nav-hamburger { display: none; background: var(--card-bg); border: 1px solid var(--rule); border-radius: 8px; padding: 7px 11px; cursor: pointer; color: var(--text-primary); font-size: 16px; line-height: 1; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+.nav-hamburger { display: block; background: var(--card-bg); border: 1px solid var(--rule); border-radius: 8px; padding: 7px 11px; cursor: pointer; color: var(--text-primary); font-size: 16px; line-height: 1; transition: background 0.2s, color 0.2s, border-color 0.2s; }
 /* ── MOBILE MENU ── */
 .mobile-menu { display: none; position: fixed; top: 68px; right: 16px; width: 240px; background: var(--nav-bg); backdrop-filter: blur(24px); border: 1px solid var(--rule); border-radius: 16px; padding: 8px; z-index: 999; flex-direction: column; gap: 2px; box-shadow: 0 8px 32px rgba(0,0,0,0.35); }
 .mobile-menu.open { display: flex; }
@@ -136,6 +136,16 @@ nav {
 [data-theme="light"] .stat-num { text-shadow: none; }
 .stat-label { font-size: 12px; font-weight: 300; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-tag); line-height: 1.5; }
 @media (max-width: 700px) { .stat-shelf { grid-template-columns: 1fr; } }
+
+/* ── PORTRAIT CARD ── */
+.portrait-card { border-radius: 16px; overflow: hidden; border: 0.5px solid rgba(45,80,200,0.35); max-width: 360px; margin: 0 auto 48px; }
+.portrait-card img { width: 100%; display: block; aspect-ratio: 3/4; object-fit: cover; object-position: top; }
+.portrait-caption { padding: 14px 16px 18px; background: rgba(10,15,30,0.9); }
+.portrait-name { font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #e8eeff; margin-bottom: 3px; }
+.portrait-title { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(120,145,195,0.7); }
+[data-theme="light"] .portrait-caption { background: #f4f6fd; }
+[data-theme="light"] .portrait-name { color: #12266e; }
+[data-theme="light"] .portrait-title { color: rgba(83,74,183,0.6); }
 
 /* ── PROSE ── */
 .prose-block { max-width: 720px; }
@@ -278,6 +288,14 @@ footer { border-top: 1px solid var(--rule); padding: 32px 48px; max-width: 1100p
 <!-- PORTRAIT + STATS -->
 <div class="section-inner" style="padding-top: 0;">
   <div class="section-rule"></div>
+
+  <div class="portrait-card">
+    <img src="images/richard-wherry.jpg" alt="Richard Wherry, Principal at Lumen Solutions LLC">
+    <div class="portrait-caption">
+      <div class="portrait-name">Richard Wherry</div>
+      <div class="portrait-title">Principal</div>
+    </div>
+  </div>
 
   <div class="stat-shelf">
     <div class="stat-cell">

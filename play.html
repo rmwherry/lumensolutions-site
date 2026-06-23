@@ -43,7 +43,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; height: 64px; display: flex; a
 [data-theme="light"] .btn-chat:hover { background: rgba(83,74,183,0.18); }
 .btn-contact { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-primary); border: 1px solid var(--btn-border); border-radius: 100px; padding: 8px 18px; text-decoration: none; transition: background 0.25s, color 0.25s, border-color 0.25s; white-space: nowrap; }
 .btn-contact:hover { background: var(--btn-fill); border-color: var(--btn-fill); color: #fff; }
-.nav-hamburger { display: none; background: transparent; border: 1px solid var(--rule); border-radius: 8px; padding: 7px 11px; cursor: pointer; color: var(--text-primary); font-size: 16px; line-height: 1; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+.nav-hamburger { display: block; background: transparent; border: 1px solid var(--rule); border-radius: 8px; padding: 7px 11px; cursor: pointer; color: var(--text-primary); font-size: 16px; line-height: 1; transition: background 0.2s, color 0.2s, border-color 0.2s; }
 .nav-hamburger:hover { background: var(--btn-fill) !important; color: #fff !important; border-color: var(--btn-fill) !important; }
 .mobile-menu { display: none; position: fixed; top: 68px; right: 16px; width: 240px; background: var(--nav-bg); backdrop-filter: blur(24px); border: 1px solid var(--rule); border-radius: 16px; padding: 8px; z-index: 999; flex-direction: column; gap: 2px; box-shadow: 0 8px 32px rgba(0,0,0,0.35); }
 .mobile-menu.open { display: flex; }
@@ -108,6 +108,46 @@ function toggleTheme() {
 }
 function toggleMobile() { document.getElementById('mobile-menu').classList.toggle('open'); }
 
+// ── Audio ─────────────────────────────────────────────────────────────────────
+const SFX = (() => {
+  let actx;
+  function ac() {
+    if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+    return actx;
+  }
+  function tone(freq, type, dur, vol = 0.22, delay = 0) {
+    try {
+      const a = ac(), o = a.createOscillator(), g = a.createGain();
+      o.connect(g); g.connect(a.destination);
+      o.type = type; o.frequency.value = freq;
+      const t = a.currentTime + delay;
+      g.gain.setValueAtTime(vol, t);
+      g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+      o.start(t); o.stop(t + dur + 0.01);
+    } catch(e) {}
+  }
+  return {
+    shoot()     { tone(900,'square',0.07,0.18); },
+    invDie()    { tone(300,'sawtooth',0.06,0.22); tone(180,'sawtooth',0.08,0.20,0.07); tone(90,'sawtooth',0.10,0.22,0.14); },
+    playerDie() { tone(200,'sawtooth',0.12,0.28); tone(130,'sawtooth',0.14,0.28,0.12); tone(70,'sawtooth',0.18,0.28,0.24); },
+    ufoKill()   { tone(600,'sine',0.06,0.28); tone(900,'sine',0.06,0.22,0.07); tone(1200,'sine',0.08,0.18,0.14); },
+    march(n)    { const f = [160,130,100,80][n % 4]; tone(f,'square',0.05,0.14); }
+  };
+})();
+
+// ── Difficulty ────────────────────────────────────────────────────────────────
+const DIFF = {
+  level: 1,
+  labels: ['EASY','NORMAL','HARD'],
+  colors: ['#22cc88','#5577ff','#ff4455'],
+  configs: [
+    { invBase: 80, eBase: 130, eSpd: 3.2, maxBlt: 2 },
+    { invBase: 60, eBase: 90,  eSpd: 4.5, maxBlt: 3 },
+    { invBase: 45, eBase: 65,  eSpd: 5.5, maxBlt: 4 },
+  ],
+  get cfg() { return this.configs[this.level]; }
+};
+
 // ── Canvas setup ─────────────────────────────────────────────────────────────
 const cv  = document.getElementById('game-canvas');
 const ctx = cv.getContext('2d');
@@ -128,7 +168,7 @@ const T = {
   dim:'rgba(120,145,195,0.7)', accent:'#2D50C8', accentBright:'#5577ff',
   player:'#e8eeff', bltP:'#ffffff', bltE:'#ff4455', ufo:'#ff2244',
   bunker:'#22cc88',
-  rows:['#e8eeff','#88bbff','#88bbff','#4a7aff','#2D50C8'],
+  rows:['#ffffff','#aad4ff','#7fb4ff','#4a7aff','#2D50C8'],
   glow:true,
   sync() {
     const dark = document.documentElement.getAttribute('data-theme') !== 'light';
@@ -140,8 +180,8 @@ const T = {
     this.player = dark ? '#e8eeff'                    : '#12266e';
     this.bunker = dark ? '#22cc88'                    : '#1a9966';
     this.rows   = dark
-      ? ['#e8eeff','#88bbff','#88bbff','#4a7aff','#2D50C8']
-      : ['#12266e','#1a3890','#1a3890','#2D50C8','#4a7aff'];
+      ? ['#ffffff','#aad4ff','#7fb4ff','#4a7aff','#2D50C8']
+      : ['#12266e','#1a3890','#2D50C8','#4a7aff','#7fb4ff'];
     this.glow   = dark;
   }
 };
@@ -284,6 +324,7 @@ const G = {
   // VFX
   particles: [],    // [{ x,y,vx,vy,life,maxLife,color }]
   ptTexts: [],      // [{ x,y,val,life }]
+  marchStep: 0,
 
   // Input
   keys: {},
@@ -307,17 +348,18 @@ function initGame() {
   G.pBullet   = null;
   G.eBullets  = [];
   G.eTimer    = 0;
-  G.eInterval = Math.max(30, 90 - (G.wave - 1) * 8);
+  G.eInterval = Math.max(20, DIFF.cfg.eBase - (G.wave - 1) * 8);
+  G.marchStep = 0;
 
   // Invaders
   G.invaders  = [];
   G.invDir    = 1;
   G.invTimer  = 0;
-  G.invInterval = Math.max(6, 60 - (G.wave - 1) * 6);
+  G.invInterval = Math.max(6, DIFF.cfg.invBase - (G.wave - 1) * 6);
   G.invDx     = 0;
   G.invDy     = 0;
 
-  const gapX = s(50), gapY = s(44);
+  const gapX = s(54), gapY = s(48);
   const gridW = COLS * gapX;
   const ox = (w - gridW) / 2 + gapX / 2;
   const oy = s(60);
@@ -330,7 +372,7 @@ function initGame() {
 
   // Bunkers
   G.bunkers = [];
-  const bCell = s(4);
+  const bCell = s(5);
   const bW = BNKR_TPL[0].length * bCell;
   const bY = h - s(110);
   for (const bFrac of [0.18, 0.38, 0.62, 0.82]) {
@@ -393,6 +435,7 @@ function stepInvaders() {
   if (!alive.length) return;
 
   alive.forEach(i => { i.anim ^= 1; });
+  SFX.march(G.marchStep++);
 
   const frac   = alive.length / (ROWS * COLS);
   const wave_k = 1 + (G.wave - 1) * 0.2;
@@ -417,6 +460,7 @@ function stepInvaders() {
 function invaderShoot() {
   const alive = getAlive();
   if (!alive.length) return;
+  if (G.eBullets.length >= DIFF.cfg.maxBlt) return;
   const cols  = [...new Set(alive.map(i => i.col))];
   const col   = cols[Math.random() * cols.length | 0];
   const inCol = alive.filter(i => i.col === col);
@@ -444,6 +488,7 @@ function update() {
   // ── Player shoot ──
   if ((G.keys[' '] || G.touchShoot) && !G.pBullet && G.respawnTimer === 0) {
     G.pBullet = { x: G.px, y: G.py - s(20) };
+    SFX.shoot();
   }
   G.touchShoot = false;
 
@@ -455,7 +500,7 @@ function update() {
 
   // ── Enemy bullets ──
   for (let i = G.eBullets.length - 1; i >= 0; i--) {
-    G.eBullets[i].y += s(4.5 + (G.wave - 1) * 0.4);
+    G.eBullets[i].y += s(DIFF.cfg.eSpd + (G.wave - 1) * 0.4);
     if (G.eBullets[i].y > h) G.eBullets.splice(i, 1);
   }
 
@@ -497,6 +542,7 @@ function update() {
         if (G.score > G.hiScore) { G.hiScore = G.score; localStorage.setItem('lumen-si-hi', G.hiScore); }
         explode(inv.baseX + G.invDx + s(11), inv.baseY + G.invDy + s(8), T.rows[inv.row]);
         popText(inv.baseX + G.invDx + s(11), inv.baseY + G.invDy, `+${inv.pts}`);
+        SFX.invDie();
         G.pBullet = null;
         break;
       }
@@ -511,6 +557,7 @@ function update() {
       explode(G.ufo.x, G.ufo.y, T.ufo, 22);
       popText(G.ufo.x, G.ufo.y, `${G.ufo.pts}`);
       G.ufo.showTimer = 80;
+      SFX.ufoKill();
       G.pBullet = null;
     }
   }
@@ -530,6 +577,7 @@ function update() {
         G.eBullets.splice(i, 1);
         G.lives--;
         explode(G.px, G.py, T.player, 24);
+        SFX.playerDie();
         if (G.lives <= 0) {
           G.state = 'GAME_OVER';
           localStorage.setItem('lumen-si-hi', G.hiScore);
@@ -633,26 +681,57 @@ function drawHUD() {
   ctx.textBaseline = 'top';
   ctx.shadowBlur = 0;
 
-  ctx.font      = `400 ${s(14)}px Outfit,sans-serif`;
+  // Score — left, large
+  if (T.glow) { ctx.shadowColor = T.accentBright; ctx.shadowBlur = 8; }
+  ctx.font      = `700 ${s(20)}px Outfit,sans-serif`;
   ctx.fillStyle = T.text;
   ctx.textAlign = 'left';
-  ctx.fillText(`SCORE  ${String(G.score).padStart(6,'0')}`, s(20), s(8));
+  ctx.fillText(String(G.score).padStart(6,'0'), s(20), s(4));
+  ctx.shadowBlur = 0;
+  ctx.font      = `300 ${s(9.5)}px Outfit,sans-serif`;
+  ctx.fillStyle = T.dim;
+  ctx.fillText('SCORE', s(20), s(27));
 
+  // Hi-score — center
+  ctx.font      = `400 ${s(15)}px Outfit,sans-serif`;
   ctx.fillStyle = T.dim;
   ctx.textAlign = 'center';
-  ctx.fillText(`HI  ${String(G.hiScore).padStart(6,'0')}`, w / 2, s(8));
+  ctx.fillText(String(G.hiScore).padStart(6,'0'), w / 2, s(6));
+  ctx.font      = `300 ${s(9.5)}px Outfit,sans-serif`;
+  ctx.fillText('HI', w / 2, s(24));
 
-  ctx.textAlign = 'right';
-  ctx.fillText(`WAVE  ${G.wave}`, w - s(20), s(8));
-
-  // Lives mini-ships
+  // Wave — right, large
+  if (T.glow) { ctx.shadowColor = T.accentBright; ctx.shadowBlur = 8; }
+  ctx.font      = `700 ${s(20)}px Outfit,sans-serif`;
   ctx.fillStyle = T.text;
   ctx.textAlign = 'right';
-  ctx.font      = `300 ${s(11)}px Outfit,sans-serif`;
-  ctx.fillText('LIVES', w - s(20), s(26));
+  ctx.fillText(String(G.wave), w - s(20), s(4));
+  ctx.shadowBlur = 0;
+  ctx.font      = `300 ${s(9.5)}px Outfit,sans-serif`;
+  ctx.fillStyle = T.dim;
+  ctx.fillText('WAVE', w - s(20), s(27));
+
+  // Difficulty badge — right, below wave
+  ctx.font      = `300 ${s(8.5)}px Outfit,sans-serif`;
+  ctx.fillStyle = DIFF.colors[DIFF.level];
+  ctx.textAlign = 'right';
+  ctx.fillText(DIFF.labels[DIFF.level], w - s(20), s(40));
+
+  // Lives mini-ships
+  ctx.fillStyle = T.dim;
+  ctx.textAlign = 'left';
+  ctx.font      = `300 ${s(9.5)}px Outfit,sans-serif`;
+  ctx.textBaseline = 'top';
+  ctx.fillText('LIVES', s(20), s(40));
   for (let i = 0; i < G.lives; i++) {
-    drawPlayer(w - s(62) - i * s(22), s(28), 0.75);
+    drawPlayer(s(52) + i * s(22), s(42), 0.75);
   }
+
+  // HUD separator
+  ctx.fillStyle = T.accent;
+  if (T.glow) { ctx.shadowColor = T.accent; ctx.shadowBlur = 4; }
+  ctx.fillRect(0, s(54), w, s(1));
+  ctx.shadowBlur = 0;
 
   // Ground line
   ctx.fillStyle = T.accent;
@@ -681,7 +760,7 @@ function drawGame() {
   drawBunkers();
 
   // Invaders
-  const px = s(2.8);
+  const px = s(3);
   for (const inv of G.invaders) {
     if (!inv.alive) continue;
     const key  = inv.type + inv.anim;
@@ -764,28 +843,55 @@ function drawGame() {
 
   // ── Overlay: GAME OVER ──
   if (G.state === 'GAME_OVER') {
-    ctx.fillStyle = 'rgba(0,0,0,0.72)';
+    ctx.fillStyle = 'rgba(0,0,0,0.80)';
     ctx.fillRect(0, 0, w, h);
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
 
-    if (T.glow) { ctx.shadowColor = '#ff2244'; ctx.shadowBlur = 50; }
-    ctx.font = `700 ${s(52)}px Outfit,sans-serif`;
+    if (T.glow) { ctx.shadowColor = '#ff2244'; ctx.shadowBlur = 60; }
+    ctx.font = `700 ${s(56)}px Outfit,sans-serif`;
     ctx.fillStyle = '#ff2244';
-    ctx.fillText('GAME OVER', w / 2, h * 0.36);
+    ctx.fillText('GAME OVER', w / 2, h * 0.28);
     ctx.shadowBlur = 0;
 
-    ctx.font = `300 ${s(18)}px Outfit,sans-serif`;
-    ctx.fillStyle = T.text;
-    ctx.fillText(`SCORE  ${G.score}`, w / 2, h * 0.50);
+    // Divider
+    ctx.fillStyle = 'rgba(255,34,68,0.25)';
+    ctx.fillRect(w * 0.2, h * 0.38, w * 0.6, 1);
 
-    ctx.font = `300 ${s(14)}px Outfit,sans-serif`;
+    // Final score — large
+    if (T.glow) { ctx.shadowColor = T.accentBright; ctx.shadowBlur = 12; }
+    ctx.font = `700 ${s(32)}px Outfit,sans-serif`;
+    ctx.fillStyle = T.text;
+    ctx.fillText(String(G.score).padStart(6,'0'), w / 2, h * 0.46);
+    ctx.shadowBlur = 0;
+    ctx.font = `300 ${s(11)}px Outfit,sans-serif`;
     ctx.fillStyle = T.dim;
-    ctx.fillText(`HI SCORE  ${G.hiScore}`, w / 2, h * 0.59);
+    ctx.fillText('FINAL SCORE', w / 2, h * 0.54);
+
+    // Wave reached
+    ctx.font = `300 ${s(14)}px Outfit,sans-serif`;
+    ctx.fillStyle = T.sub;
+    ctx.fillText(`REACHED WAVE  ${G.wave}`, w / 2, h * 0.63);
+
+    // Hi-score line
+    ctx.font = `300 ${s(12)}px Outfit,sans-serif`;
+    ctx.fillStyle = T.dim;
+    ctx.fillText(`HI  ${String(G.hiScore).padStart(6,'0')}`, w / 2, h * 0.71);
+
+    // New hi score flash
+    if (G.score > 0 && G.score >= G.hiScore) {
+      if (Math.floor(G.frame / 20) % 2 === 0) {
+        if (T.glow) { ctx.shadowColor = '#ffd700'; ctx.shadowBlur = 20; }
+        ctx.font = `700 ${s(13)}px Outfit,sans-serif`;
+        ctx.fillStyle = '#ffd700';
+        ctx.fillText('★  NEW  HI  SCORE  ★', w / 2, h * 0.71);
+        ctx.shadowBlur = 0;
+      }
+    }
 
     if (Math.floor(G.frame / 32) % 2 === 0) {
       ctx.fillStyle = T.sub;
-      ctx.font = `400 ${s(14)}px Outfit,sans-serif`;
-      ctx.fillText('SPACE  ·  ENTER  ·  TAP  TO  PLAY  AGAIN', w / 2, h * 0.76);
+      ctx.font = `400 ${s(12)}px Outfit,sans-serif`;
+      ctx.fillText('SPACE  ·  ENTER  ·  TAP  TO  PLAY  AGAIN', w / 2, h * 0.87);
     }
   }
 }
@@ -846,19 +952,62 @@ function drawTitle() {
   ctx.fillStyle = T.ufo; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
   ctx.fillText('=  MYSTERY', w / 2 - s(40) + s(50), uy);
 
+  // ── Difficulty selector ──
+  const diffY = h * 0.73;
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.font = `300 ${s(9.5)}px Outfit,sans-serif`;
+  ctx.fillStyle = T.dim;
+  ctx.fillText('DIFFICULTY', w / 2, diffY - s(14));
+
+  const btnW = s(72), btnH = s(22), btnGap = s(8);
+  const totalW = 3 * btnW + 2 * btnGap;
+  const bx0 = w / 2 - totalW / 2;
+  for (let i = 0; i < 3; i++) {
+    const bx = bx0 + i * (btnW + btnGap);
+    const by = diffY - btnH / 2;
+    const sel = DIFF.level === i;
+    ctx.beginPath();
+    ctx.roundRect(bx, by, btnW, btnH, 6);
+    if (sel) {
+      ctx.fillStyle = DIFF.colors[i] + '30';
+      ctx.fill();
+      ctx.strokeStyle = DIFF.colors[i];
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      if (T.glow) { ctx.shadowColor = DIFF.colors[i]; ctx.shadowBlur = 10; }
+      ctx.font = `700 ${s(11)}px Outfit,sans-serif`;
+      ctx.fillStyle = DIFF.colors[i];
+    } else {
+      ctx.globalAlpha = 0.4;
+      ctx.strokeStyle = T.dim;
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+      ctx.font = `300 ${s(11)}px Outfit,sans-serif`;
+      ctx.fillStyle = T.dim;
+    }
+    ctx.fillText(DIFF.labels[i], bx + btnW / 2, diffY);
+    ctx.shadowBlur = 0;
+  }
+
+  ctx.font = `300 ${s(9.5)}px Outfit,sans-serif`;
+  ctx.fillStyle = T.dim;
+  ctx.textAlign = 'center';
+  ctx.fillText('← → TO SELECT', w / 2, diffY + s(20));
+
   // Blink prompt
   if (Math.floor(G.frame / 28) % 2 === 0) {
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     if (T.glow) { ctx.shadowColor = T.accent; ctx.shadowBlur = 14; }
-    ctx.font = `400 ${s(16)}px Outfit,sans-serif`;
+    ctx.font = `400 ${s(15)}px Outfit,sans-serif`;
     ctx.fillStyle = T.sub;
-    ctx.fillText('PRESS  SPACE  OR  TAP  TO  START', w / 2, h * 0.89);
+    ctx.fillText('PRESS  SPACE  OR  TAP  TO  START', w / 2, h * 0.90);
     ctx.shadowBlur = 0;
   }
 
   // Controls
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.font = `300 ${s(10.5)}px Outfit,sans-serif`;
+  ctx.font = `300 ${s(10)}px Outfit,sans-serif`;
   ctx.fillStyle = T.dim;
   ctx.fillText('ARROWS / WASD  ·  SPACE TO SHOOT  ·  P TO PAUSE', w / 2, h * 0.96);
 }
@@ -907,6 +1056,10 @@ document.addEventListener('keydown', e => {
   }
   if ((e.key === 'p' || e.key === 'P') && (G.state === 'PLAYING' || G.state === 'PAUSED')) {
     G.state = G.state === 'PLAYING' ? 'PAUSED' : 'PLAYING';
+  }
+  if (G.state === 'TITLE') {
+    if (e.key === 'ArrowLeft')  DIFF.level = (DIFF.level + 2) % 3;
+    if (e.key === 'ArrowRight') DIFF.level = (DIFF.level + 1) % 3;
   }
   if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown',' '].includes(e.key)) e.preventDefault();
 });
