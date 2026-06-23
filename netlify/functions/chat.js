@@ -1,8 +1,8 @@
 // Lumen Chat — Netlify Function
 // POST /.netlify/functions/chat
-// See: lumen-core/LumenChat_CodeSpec_v1.md
+// Uses Node built-in https — no npm dependency required.
 
-const Anthropic = require('@anthropic-ai/sdk');
+const https = require('https');
 
 const SYSTEM_PROMPT = `You are Lumen, the AI assistant for Lumen Solutions LLC — Richard Wherry's AI consulting practice.
 
@@ -40,114 +40,110 @@ If they say "keep exploring" after the CTA, continue the conversation for 1-2 mo
 
 ## The Guardrail: What You Must NOT Do
 
-You are here to help them understand the problem and the fit — not to solve the problem for them.
-
 - Do NOT write code, build anything, or provide implementation plans.
 - Do NOT prescribe specific tools, vendors, or architectures.
 - Do NOT deliver the full value of an engagement in a chat window.
-- Do NOT pretend to commit Richard's time, capacity, or rates without framing it as "something to confirm with Richard directly."
-- Do NOT give confident answers about pricing for specific scopes — point to the standard rate and note that scope drives the real number.
-
-You can be smart about the problem space. You can name patterns, frame the tradeoffs, and help them understand what they're dealing with. That's vocabulary transfer. The prescription is Richard's.
+- Do NOT pretend to commit Richard's time, capacity, or rates without framing it as something to confirm with Richard directly.
+- Do NOT give confident answers about pricing for specific scopes.
 
 ## Tone
 
-Direct, warm, and confident. Not corporate. Not a FAQ bot. Never say "Certainly!" or "Great question!" Short messages by default. Long only when genuinely called for.
+Direct, warm, and confident. Not corporate. Not a FAQ bot. Never say "Certainly!" or "Great question!" Short messages by default.
 
 ## Employer / Recruiter Visitors
 
-If the visitor is clearly a recruiter or prospective employer (mentions "role," "position," "team," "hiring," etc.):
+If the visitor mentions "role," "position," "team," or "hiring":
 - Acknowledge the context directly
-- Point them to the resume page: https://lumensolutions.co/resume.html
-- Route to email for a direct conversation: rmwherry@gmail.com
+- Point them to: https://lumensolutions.co/resume.html
+- Route to email: rmwherry@gmail.com
 
 ## The [ROUTE_CTA] Signal
 
-When routing the visitor to Richard, include exactly [ROUTE_CTA] at the end of your message. The UI renders a "Connect with Richard" card automatically. Include it once per natural routing moment. Do not explain what it is.
+Include exactly [ROUTE_CTA] at the end of your message when routing. The UI renders a card. Include it once per natural routing moment.
 
 ## Off-Topic Requests
 
-Gently redirect: "I'm built for conversations about Richard's work. Want to tell me what you're working on?"`;
+Gently redirect: "I am built for conversations about Richard's work. Want to tell me what you're working on?"`;
+
+function callAnthropic(apiKey, messages) {
+  return new Promise((resolve, reject) => {
+    const body = JSON.stringify({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 512,
+      system: SYSTEM_PROMPT,
+      messages
+    });
+
+    const options = {
+      hostname: 'api.anthropic.com',
+      path: '/v1/messages',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(body),
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01'
+      }
+    };
+
+    const req = https.request(options, (res) => {
+      let data = '';
+      res.on('data', chunk => { data += chunk; });
+      res.on('end', () => {
+        try {
+          resolve({ status: res.statusCode, body: JSON.parse(data) });
+        } catch (e) {
+          reject(new Error('Failed to parse response'));
+        }
+      });
+    });
+
+    req.on('error', reject);
+    req.setTimeout(25000, () => { req.destroy(new Error('Timeout')); });
+    req.write(body);
+    req.end();
+  });
+}
 
 exports.handler = async function (event) {
-  // Only POST
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  // Parse body
   let body;
-  try {
-    body = JSON.parse(event.body);
-  } catch {
-    return {
-      statusCode: 400,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content: "I hit a snag on my end. You can reach Richard directly at rmwherry@gmail.com." })
-    };
-  }
+  try { body = JSON.parse(event.body); }
+  catch { return { statusCode: 400, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content: "I hit a snag on my end. You can reach Richard directly at rmwherry@gmail.com." }) }; }
 
   const { messages } = body;
-
-  // Input validation
   if (!messages || !Array.isArray(messages) || messages.length === 0) {
-    return {
-      statusCode: 400,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content: "I hit a snag on my end. You can reach Richard directly at rmwherry@gmail.com." })
-    };
+    return { statusCode: 400, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content: "I hit a snag on my end." }) };
   }
   if (messages.length > 40) {
-    return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content: "We've covered a lot of ground. At this point a direct conversation with Richard is the right next step. [ROUTE_CTA]" })
-    };
+    return { statusCode: 200, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content: "We have covered a lot of ground. A direct conversation with Richard is the right next step. [ROUTE_CTA]" }) };
   }
 
-  // Sanitize: strip messages over 2000 chars, enforce valid roles
   const sanitized = messages
     .filter(m => m && (m.role === 'user' || m.role === 'assistant') && m.content)
-    .map(m => ({
-      role: m.role,
-      content: String(m.content).slice(0, 2000)
-    }));
+    .map(m => ({ role: m.role, content: String(m.content).slice(0, 2000) }));
 
-  if (sanitized.length === 0) {
-    return {
-      statusCode: 400,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content: "I hit a snag on my end. You can reach Richard directly at rmwherry@gmail.com." })
-    };
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    console.error('[LumenChat] ANTHROPIC_API_KEY not set');
+    return { statusCode: 200, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content: "I hit a snag on my end. You can reach Richard directly at rmwherry@gmail.com. [ROUTE_CTA]" }) };
   }
 
-  // Call Claude
   try {
-    const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-
-    const response = await client.messages.create({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 512,
-      system: SYSTEM_PROMPT,
-      messages: sanitized
-    });
-
-    const content = response.content[0]?.text ?? "I hit a snag on my end. You can reach Richard directly at rmwherry@gmail.com. [ROUTE_CTA]";
-
-    return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content })
-    };
-
+    const result = await callAnthropic(apiKey, sanitized);
+    if (result.status !== 200) {
+      console.error('[LumenChat] API error ' + result.status + ':', JSON.stringify(result.body));
+      return { statusCode: 200, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content: "I hit a snag on my end. You can reach Richard at rmwherry@gmail.com. [ROUTE_CTA]" }) };
+    }
+    const content = result.body && result.body.content && result.body.content[0] && result.body.content[0].text
+      ? result.body.content[0].text
+      : "I hit a snag on my end. You can reach Richard at rmwherry@gmail.com. [ROUTE_CTA]";
+    return { statusCode: 200, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content }) };
   } catch (err) {
-    console.error('[LumenChat] Anthropic API error:', err?.message ?? err);
-    return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        content: "I hit a snag on my end. You can reach Richard directly at rmwherry@gmail.com — that's the most reliable path anyway. [ROUTE_CTA]"
-      })
-    };
+    console.error('[LumenChat] Error:', err && err.message ? err.message : err);
+    return { statusCode: 200, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content: "I hit a snag on my end. You can reach Richard at rmwherry@gmail.com. [ROUTE_CTA]" }) };
   }
 };
