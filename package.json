@@ -1,0 +1,8 @@
+{
+  "name": "lumensolutions-site",
+  "version": "1.0.0",
+  "description": "Lumen Solutions LLC website",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.27.0"
+  }
+}
