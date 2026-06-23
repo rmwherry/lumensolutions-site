@@ -3,7 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Space Invaders — Lumen Edition. A neon Electric Classicism arcade game built by Richard and Lumen.">
 <title>Space Invaders &mdash; Lumen Solutions LLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://lumensolutions.co/play.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lumen Solutions LLC">
+<meta property="og:title" content="Space Invaders — Lumen Edition — Lumen Solutions LLC">
+<meta property="og:description" content="Space Invaders — Lumen Edition. A neon Electric Classicism arcade game built by Richard and Lumen.">
+<meta property="og:url" content="https://lumensolutions.co/play.html">
+<meta property="og:image" content="https://lumensolutions.co/images/richard-wherry.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <style>
@@ -60,6 +70,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; height: 64px; display: flex; a
 @media (max-width: 1100px) { .nav-hamburger { display: block; } nav { padding: 0 20px; } }
 @media (max-width: 560px) { .btn-chat, .btn-contact { padding: 6px 10px; font-size: 10px; letter-spacing: 0.07em; } .nav-toggle-label { display: none; } .nav-actions { gap: 6px; } }
 #game-canvas { position: fixed; top: 64px; left: 0; width: 100%; height: calc(100dvh - 64px); display: block; cursor: crosshair; }
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
 </head>
 <body>
@@ -89,11 +100,15 @@ nav { position: fixed; top: 0; left: 0; right: 0; height: 64px; display: flex; a
   <a href="about-richard.html" class="mm-item"><i class="ti ti-user"></i>About Richard</a>
   <a href="about-lumen.html" class="mm-item"><i class="ti ti-sparkles"></i>About Lumen</a>
   <a href="chat.html" class="mm-item mm-item--chat"><i class="ti ti-message-circle"></i>Chat with Lumen</a>
-  <a href="play.html" class="mm-item mm-item--play"><i class="ti ti-device-gamepad"></i>Space Invaders</a>
+  <a href="play.html" class="mm-item mm-item--play" aria-current="page"><i class="ti ti-device-gamepad"></i>Space Invaders</a>
   <a href="contact.html" class="mm-item mm-item--contact"><i class="ti ti-mail"></i>Contact Us</a>
 </div>
 
+<main>
+<h1 class="sr-only">Space Invaders — Lumen Edition</h1>
 <canvas id="game-canvas"></canvas>
+
+</main>
 
 <script>
 // ── Nav helpers ──────────────────────────────────────────────────────────────

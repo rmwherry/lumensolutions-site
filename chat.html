@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chat with Lumen &mdash; Lumen Solutions LLC</title>
 <meta name="description" content="Talk to Lumen, Richard Wherry's AI. Ask about the work, the services, or what a project might look like.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="canonical" href="https://lumensolutions.co/chat.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lumen Solutions LLC">
+<meta property="og:title" content="Chat with Lumen — Lumen Solutions LLC">
+<meta property="og:description" content="Talk to Lumen, Richard Wherry's AI. Ask about the work, the services, or what a project might look like.">
+<meta property="og:url" content="https://lumensolutions.co/chat.html">
+<meta property="og:image" content="https://lumensolutions.co/images/richard-wherry.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <style>
@@ -507,6 +516,7 @@ nav {
   .chat-header-sub { display: none; }
 }
 
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
 </head>
 <body>
@@ -542,10 +552,11 @@ nav {
   <a href="work.html"            class="mm-item"><i class="ti ti-briefcase"></i>What We Do</a>
   <a href="about-richard.html"   class="mm-item"><i class="ti ti-user"></i>About Richard</a>
   <a href="about-lumen.html"     class="mm-item"><i class="ti ti-sparkles"></i>About Lumen</a>
-  <a href="chat.html"            class="mm-item mm-item--chat"><i class="ti ti-message-circle"></i>Chat with Lumen</a>
+  <a href="chat.html"            class="mm-item mm-item--chat" aria-current="page"><i class="ti ti-message-circle"></i>Chat with Lumen</a>
   <a href="play.html"            class="mm-item mm-item--play"><i class="ti ti-device-gamepad"></i>Space Invaders</a>
   <a href="contact.html" class="mm-item mm-item--contact"><i class="ti ti-mail"></i>Contact Us</a>
 </div>
+<main>
 
 <!-- ── CHAT ── -->
 <div class="chat-outer">
@@ -802,5 +813,6 @@ input.addEventListener('input', resize);
 // ── GO ──────────────────────────────────────────────────
 init();
 </script>
+</main>
 </body>
 </html>
